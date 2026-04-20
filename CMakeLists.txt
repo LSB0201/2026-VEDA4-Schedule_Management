@@ -11,6 +11,7 @@ qt_add_executable(2026-VEDA4-Schedule_Management
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    resources.qrc
 )
 
 target_link_libraries(2026-VEDA4-Schedule_Management
