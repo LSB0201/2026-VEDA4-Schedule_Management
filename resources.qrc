@@ -1,8 +1,8 @@
 <RCC>
     <qresource prefix="/icon">
-        <file>resources/icon/placeholder-img-user.png</file>
+        <file>resources/img/icon/placeholder-img-user.png</file>
     </qresource>
     <qresource prefix="/background">
-        <file>resources/background/placeholder-img-background.png</file>
+        <file>resources/img/background/placeholder-img-background.png</file>
     </qresource>
 </RCC>
