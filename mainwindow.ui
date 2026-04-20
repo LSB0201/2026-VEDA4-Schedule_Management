@@ -3,56 +3,76 @@
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>1920</width>
-    <height>1080</height>
-   </rect>
-  </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
-  </property>
-  <property name="windowTitle">
-   <string>MainWindow</string>
+   <rect><x>0</x><y>0</y><width>1280</width><height>800</height></rect>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QtMaterialFlatButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>210</y>
-      <width>80</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-   </widget>
+   <layout class="QHBoxLayout" name="mainLayout">
+    <property name="spacing"><number>0</number></property>
+    <property name="leftMargin"><number>0</number></property>
+    <property name="topMargin"><number>0</number></property>
+    <property name="rightMargin"><number>0</number></property>
+    <property name="bottomMargin"><number>0</number></property>
+
+    <!-- Left Sidebar -->
+    <item>
+     <widget class="QFrame" name="sideBar">
+      <property name="minimumSize"><size><width>80</width><height>0</height></size></property>
+      <property name="maximumSize"><size><width>80</width><height>16777215</height></size></property>
+      <layout class="QVBoxLayout" name="sideBarLayout">
+       <item><widget class="QPushButton" name="btn_logo"><property name="text"><string>Logo</string></property></widget></item>
+       <item><spacer name="spacer1"><property name="orientation"><enum>Qt::Vertical</enum></property></spacer></item>
+       <item><widget class="QPushButton" name="btn_cal"><property name="text"><string>Cal</string></property></widget></item>
+       <item><widget class="QPushButton" name="btn_profile"><property name="text"><string>User</string></property></widget></item>
+       <item><spacer name="spacer2"><property name="orientation"><enum>Qt::Vertical</enum></property></spacer></item>
+      </layout>
+     </widget>
+    </item>
+
+    <!-- Main Content Area -->
+    <item>
+     <layout class="QVBoxLayout" name="contentLayout">
+      <!-- Top Bar -->
+      <item>
+       <widget class="QFrame" name="topBar">
+        <property name="minimumSize"><size><width>0</width><height>60</height></size></property>
+        <layout class="QHBoxLayout" name="topBarLayout">
+         <item><widget class="QLabel" name="lbl_title"><property name="text"><string>Atrium Dashboard</string></property></widget></item>
+         <item><spacer name="hSpacer"><property name="orientation"><enum>Qt::Horizontal</enum></property></spacer></item>
+         <item><widget class="QPushButton" name="btn_month"><property name="text"><string>2026. 4월</string></property></widget></item>
+        </layout>
+       </widget>
+      </item>
+
+      <!-- Body Split (Calendar + Details) -->
+      <item>
+       <layout class="QHBoxLayout" name="bodyLayout">
+        <!-- Calendar Grid Container -->
+        <item>
+         <widget class="QFrame" name="calendarContainer">
+          <layout class="QGridLayout" name="calendarGrid">
+           <!-- Grid cells will be added here -->
+          </layout>
+         </widget>
+        </item>
+
+        <!-- Right Details Panel -->
+        <item>
+         <widget class="QFrame" name="detailsPanel">
+          <property name="minimumSize"><size><width>350</width><height>0</height></size></property>
+          <property name="maximumSize"><size><width>350</width><height>16777215</height></size></property>
+          <layout class="QVBoxLayout" name="detailsLayout">
+           <item><widget class="QLabel" name="lbl_date"><property name="text"><string>2026. 4. 20</string></property></widget></item>
+           <item><widget class="QScrollArea" name="scheduleScroll"><widget class="QWidget" name="scrollContent"></widget></widget></item>
+           <item><widget class="QtMaterialFlatButton" name="btn_add"><property name="text"><string>+ Add Schedule</string></property></widget></item>
+           <item><widget class="QPushButton" name="btn_delete"><property name="text"><string>Delete Schedule</string></property></widget></item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1920</width>
-     <height>17</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QtMaterialFlatButton</class>
-   <extends>QPushButton</extends>
-   <header location="global">qtmaterialflatbutton.h</header>
-  </customwidget>
- </customwidgets>
- <resources/>
- <connections/>
 </ui>
