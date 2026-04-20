@@ -1,54 +1,61 @@
-# C++ objects and libs
-*.slo
-*.lo
+# --- Build Artifacts ---
 *.o
+*.obj
 *.a
 *.la
-*.lai
+*.lo
+*.slo
 *.so
 *.so.*
 *.dll
+*.exe
 *.dylib
+*.core
+*.debug
+Makefile*
+*build-*/
+/build*/
+.moc/
+.obj/
+.pch/
+.rcc/
+.uic/
 
-# Qt-es
-object_script.*.Release
-object_script.*.Debug
-*_plugin_import.cpp
-/.qmake.cache
-/.qmake.stash
-*.pro.user
-*.pro.user.*
-*.qbs.user
-*.qbs.user.*
+# --- Qt generated files ---
 *.moc
 moc_*.cpp
 moc_*.h
 qrc_*.cpp
 ui_*.h
-*.qmlc
-*.jsc
-Makefile*
-*build-*
 *.qm
 *.prl
+*.qmlc
+*.jsc
+object_script.*
+*_plugin_import.cpp
+/.qmake.cache
+/.qmake.stash
 
-# Qt unit tests
-target_wrapper.*
-
-# QtCreator
-*.autosave
-
-# QtCreator Qml
+# --- Qt Creator / IDE files ---
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+CMakeLists.txt.user*
 *.qmlproject.user
 *.qmlproject.user.*
-
-# QtCreator CMake
-CMakeLists.txt.user*
-
-# QtCreator 4.8< compilation database
+*.autosave
+*creator.user*
+/.qtcreator/
 compile_commands.json
 
-# QtCreator local machine specific files for imported projects
-*creator.user*
-
-*_qmlcache.qrc
+# --- System & Temp files ---
+.DS_Store
+.directory
+Thumbs.db
+*~
+*.orig
+*.rej
+.*.swp
+.#*
+*.*#
