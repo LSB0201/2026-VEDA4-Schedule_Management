@@ -5,4 +5,7 @@
     <qresource prefix="/background">
         <file>resources/img/background/placeholder-img-background.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>resources/style.qss</file>
+    </qresource>
 </RCC>

@@ -1,0 +1,19 @@
+/* 메인 윈도우 배경 설정 */
+QMainWindow {
+    background-image: url(:/img/background/placeholder-img-background.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #f5f5f5; /* 이미지 로딩 전이나 빈 공간을 위한 기본 연한 회색 */
+}
+
+/* 중앙 위젯 투명화 (배경 이미지가 보이도록) */
+#centralwidget {
+    background: transparent;
+}
+
+/* Material 버튼이 너무 어둡다면 QSS로 강제 교정 가능 */
+QtMaterialFlatButton {
+    qproperty-haloColor: rgba(255, 255, 255, 50); /* 클릭 효과 색상 */
+    font-weight: bold;
+    font-size: 14px;
+}
