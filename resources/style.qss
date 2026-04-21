@@ -1,19 +1,86 @@
 /* 메인 윈도우 배경 설정 */
-QMainWindow {
-    background-image: url(:/img/background/placeholder-img-background.png);
+
+/* 기본 배경 */
+    QMainWindow, #centralwidget {
+    /*
+    background-image: url(:/background/resources/img/background/placeholder-img-background.png);
     background-position: center;
     background-repeat: no-repeat;
-    background-color: #f5f5f5; /* 이미지 로딩 전이나 빈 공간을 위한 기본 연한 회색 */
+    */
+    background-color: #FFFBF9;
+    font-family: "Inter", "Segoe UI";
 }
 
-/* 중앙 위젯 투명화 (배경 이미지가 보이도록) */
-#centralwidget {
+/* 왼쪽 사이드바 */
+#sideBar {
+    background-color: white;
+    border-right: 1px solid #F9EDEA;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+#sideBar QPushButton {
     background: transparent;
+    border: none;
+    min-height: 50px;
+    color: #85736B;
 }
 
-/* Material 버튼이 너무 어둡다면 QSS로 강제 교정 가능 */
-QtMaterialFlatButton {
-    qproperty-haloColor: rgba(255, 255, 255, 50); /* 클릭 효과 색상 */
+/* 상단바 */
+#topBar {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid #F9EDEA;
+}
+
+#lbl_title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #231A15;
+}
+
+/* 달력 카드 영역 */
+#calendarContainer {
+    background-color: white;
+    border-radius: 30px;
+    margin: 20px;
+    border: 1px solid rgba(243, 115, 33, 0.1);
+}
+
+/* 우측 상세 패널 */
+#detailsPanel {
+    background-color: white;
+    border-left: 1px solid #F9EDEA;
+    padding: 20px;
+}
+
+#lbl_date {
+    font-size: 24px;
+    font-weight: 800;
+    color: #231A15;
+    margin-bottom: 20px;
+}
+
+/* 버튼 디자인 (Stitch 주황색 적용) */
+#btn_add {
+    background-color: #F37321;
+    color: white;
+    border-radius: 15px;
     font-weight: bold;
-    font-size: 14px;
+    padding: 15px;
+}
+
+#btn_delete {
+    background-color: white;
+    border: 1px solid #D7C2B9;
+    color: #BA1A1A;
+    border-radius: 15px;
+    padding: 12px;
+}
+
+/* 달력 그리드 요일 라벨 (예시) */
+QLabel.dayLabel {
+    color: #85736B;
+    font-weight: bold;
+    font-size: 11px;
+    text-transform: uppercase;
 }
