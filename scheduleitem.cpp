@@ -31,3 +31,8 @@ void ScheduleItem::setItemColor(const QColor &color)
                                      "font-size: 11px;"
                                      ).arg(hexColor));
 }
+
+void ScheduleItem::mousePressEvent(QMouseEvent *event) {
+    emit itemClicked(); // 클릭 시 시그널 발생
+    QWidget::mousePressEvent(event);
+}

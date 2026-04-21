@@ -26,6 +26,9 @@ void SidebarContentManager::loadSchedulesForDate(const QDate &date) {
     for (int i = 0; i < 3; ++i) {
         ScheduleItem *item = new ScheduleItem(contents);
 
+        // 아이템이 클릭되면 매니저의 시그널도 같이 발생하도록 연결
+        connect(item, &ScheduleItem::itemClicked, this, &SidebarContentManager::scheduleItemClicked);
+
         // item->setData("09:00", "프로젝트 회의", "내용..."); // 데이터 입력
 
         layout->addWidget(item);
