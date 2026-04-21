@@ -87,5 +87,4 @@ QLabel.dayLabel {
 
 StartWindow {
     background-color: #00FF00;
-    font-family: "Inter", "Segoe UI";
 }

@@ -8,4 +8,14 @@
     <qresource prefix="/">
         <file>resources/style.qss</file>
     </qresource>
+    <qresource prefix="/font">
+        <file>resources/font/Roboto-Bold.ttf</file>
+        <file>resources/font/Roboto-ExtraBold.ttf</file>
+        <file>resources/font/Roboto-Italic.ttf</file>
+        <file>resources/font/Roboto-Light.ttf</file>
+        <file>resources/font/Roboto-Medium.ttf</file>
+        <file>resources/font/Roboto-Regular.ttf</file>
+        <file>resources/font/Roboto-SemiBold.ttf</file>
+        <file>resources/font/Roboto-Thin.ttf</file>
+    </qresource>
 </RCC>

@@ -4,6 +4,7 @@
 #include <QApplication>
 #include <QFile>
 #include <QTextStream>
+#include <QFontDatabase>
 
 static bool DEBUG = true;
 static bool ON_STARTWINDOW = true;
@@ -11,6 +12,16 @@ static bool ON_STARTWINDOW = true;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    // font 가져오기
+    QFontDatabase::addApplicationFont(":/font/resources/font/Roboto-Bold.ttf");
+    QFontDatabase::addApplicationFont(":/font/resources/font/Roboto-ExtraBold.ttf");
+    QFontDatabase::addApplicationFont(":/font/resources/font/Roboto-Italic.ttf");
+    QFontDatabase::addApplicationFont(":/font/resources/font/Roboto-Light.ttf");
+    QFontDatabase::addApplicationFont(":/font/resources/font/Roboto-Medium.ttf");
+    QFontDatabase::addApplicationFont(":/font/resources/font/Roboto-Regular.ttf");
+    QFontDatabase::addApplicationFont(":/font/resources/font/Roboto-SemiBold.ttf");
+    QFontDatabase::addApplicationFont(":/font/resources/font/Roboto-Thin.ttf");
 
     // stylesheet 적용
     QFile file(":/resources/style.qss");
