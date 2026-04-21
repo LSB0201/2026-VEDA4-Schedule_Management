@@ -19,9 +19,9 @@ public:
     ~MainWindow() override;
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event) override;
 
 private:
     Ui::MainWindow *ui;
+    void generateCalendar(int year, int month);
 };
 #endif // MAINWINDOW_H
