@@ -17,6 +17,11 @@ public:
 
 private:
     Ui::StartWindow *ui;
+
+private slots:
+    void onLoginPageRequested();
+    void onSignUpPageRequested();
+    void onLoginRequested();
 };
 
 #endif // STARTWINDOW_H
