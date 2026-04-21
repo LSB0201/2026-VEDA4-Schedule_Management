@@ -17,18 +17,23 @@ file(GLOB_RECURSE MATERIAL_SOURCES
 qt_standard_project_setup()
 
 qt_add_executable(2026-VEDA4-Schedule_Management
-    WIN32 MACOSX_BUNDLE
+    WIN32 MACOSX_BUNDLE # 로그 확인하고 싶을 때, 주석처리
     main.cpp
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
     resources.qrc
     ${MATERIAL_SOURCES}
+    scheduleitem.cpp # 사이드 바 스케쥴 커스텀 위젯
+    scheduleitem.h
+    scheduleitem.ui
 )
 
 target_include_directories(2026-VEDA4-Schedule_Management PRIVATE
-    "${MATERIAL_WIDGETS_DIR}"
-    "${MATERIAL_WIDGETS_DIR}/lib"
+    "${CMAKE_CURRENT_SOURCE_DIR}"             # 프로젝트 루트, 추가한 코드
+    "${MATERIAL_WIDGETS_DIR}"                 # components 폴더
+    "${MATERIAL_WIDGETS_DIR}/../"            # components의 상위(lib 등이 포함된 경우), 추가한 코드
+    "${MATERIAL_WIDGETS_DIR}/lib"             # 라이브러리 핵심 로직 폴더
 )
 
 target_link_libraries(2026-VEDA4-Schedule_Management
