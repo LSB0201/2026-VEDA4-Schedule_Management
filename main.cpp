@@ -6,7 +6,7 @@
 #include <QTextStream>
 
 static bool DEBUG = true;
-static bool ON_STARTWINDOW = false;
+static bool ON_STARTWINDOW = true;
 
 int main(int argc, char *argv[])
 {
@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
             w.show();
             return a.exec();
         }
+        else return 0;
     }
     else {
         w.show();
