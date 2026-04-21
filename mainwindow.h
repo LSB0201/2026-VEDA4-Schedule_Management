@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QPropertyAnimation>
+#include "sidebaropenclose.h"
+#include "sidebarcontentmanager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,9 +21,11 @@ public:
     ~MainWindow() override;
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event) override;
 
 private:
     Ui::MainWindow *ui;
+    void generateCalendar(int year, int month);
+    SidebarOpenClose *m_sidebarController;
+    SidebarContentManager *m_contentManager;
 };
 #endif // MAINWINDOW_H
