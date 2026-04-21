@@ -1,10 +1,12 @@
 #include "mainwindow.h"
+#include "startwindow.h"
 
 #include <QApplication>
 #include <QFile>
 #include <QTextStream>
 
 static bool DEBUG = true;
+static bool ON_STARTWINDOW = false;
 
 int main(int argc, char *argv[])
 {
@@ -22,6 +24,16 @@ int main(int argc, char *argv[])
     }
 
     MainWindow w;
-    w.show();
-    return QCoreApplication::exec();
+    if (ON_STARTWINDOW){
+        StartWindow start;
+        if (start.exec() == QDialog::Accepted){
+            w.show();
+            return a.exec();
+        }
+    }
+    else {
+        w.show();
+    }
+
+    return a.exec();
 }

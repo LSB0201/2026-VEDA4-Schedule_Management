@@ -22,6 +22,9 @@ qt_add_executable(2026-VEDA4-Schedule_Management
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    startwindow.cpp
+    startwindow.h
+    startwindow.ui
     resources.qrc
     ${MATERIAL_SOURCES}
 )
