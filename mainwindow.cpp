@@ -1,7 +1,10 @@
+#include <QHeaderView>
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "daycellwidget.h" // 커스텀 위젯 헤더 포함
-#include <QHeaderView>
+#include "sidebaropenclose.h"
+#include "sidebarcontentmanager.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -9,10 +12,15 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    ui->frame_2->setVisible(false); // 사이드바 초기 숨김
+
+    // 객체 생성
+    m_sidebarController = new SidebarOpenClose(ui->frame_2, ui->closeSideBar, this, this);
+    m_contentManager = new SidebarContentManager(ui->scrollArea, this);
+
     // QTableWidget 기본 형태 세팅
     ui->calendarTable->setRowCount(6);    // 최대 6주
     ui->calendarTable->setColumnCount(7); // 일~토 7일
-
     ui->calendarTable->horizontalHeader()->hide(); // 가로 헤더 숨김
     ui->calendarTable->verticalHeader()->hide();   // 세로 헤더 숨김
     ui->calendarTable->setShowGrid(false);         // 기본 격자선 숨김
@@ -24,6 +32,16 @@ MainWindow::MainWindow(QWidget *parent)
     // 기본 선택 표시(파란색 배경 등)를 완전히 끄기
     ui->calendarTable->setSelectionMode(QAbstractItemView::NoSelection);
     ui->calendarTable->setFocusPolicy(Qt::NoFocus);
+
+    // 사이드바가 닫힐 때 달력 선택을 해제
+    connect(m_sidebarController, &SidebarOpenClose::sidebarClosed, this, [=](){
+        for(int r = 0; r < 6; ++r) {
+            for(int c = 0; c < 7; ++c) {
+                DayCellWidget *cell = qobject_cast<DayCellWidget*>(ui->calendarTable->cellWidget(r, c));
+                if(cell) cell->setSelected(false);
+            }
+        }
+    });
 
     // 셀 클릭 이벤트 연결
     connect(ui->calendarTable, &QTableWidget::cellClicked, this, [=](int row, int col){
@@ -37,14 +55,24 @@ MainWindow::MainWindow(QWidget *parent)
                 }
             }
         }
-        // 클릭된 셀만 선택 상태로 변경
+        // 클릭된 셀 처리
         DayCellWidget *clickedCell = qobject_cast<DayCellWidget*>(ui->calendarTable->cellWidget(row, col));
         if(clickedCell) {
             clickedCell->setSelected(true);
+            QDate selectedDate = clickedCell->getDate();
+
+            // 상단 날짜 라벨 텍스트 변경
+            ui->todayLabel->setText(selectedDate.toString("yyyy. M. d"));
+
+            // 사이드바에 일정 채우기
+            m_contentManager->loadSchedulesForDate(selectedDate);
+
+            // 사이드바 열기
+            m_sidebarController->openSidebar();
         }
     });
 
-    // 3. 달력 그리기 실행 (예: 2026년 4월)
+    // 달력 그리기 실행
     generateCalendar(2026, 4);
 }
 

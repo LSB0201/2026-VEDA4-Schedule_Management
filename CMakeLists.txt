@@ -31,6 +31,10 @@ qt_add_executable(2026-VEDA4-Schedule_Management
     scheduleitem.ui
     daycellwidget.cpp # 달력의 날짜 한 칸을 담당하는 커스텀 위젯
     daycellwidget.h
+    sidebaropenclose.h # 사이드바 열고 닫기 기능
+    sidebaropenclose.cpp
+    sidebarcontentmanager.h # 사이드바에 스케줄 커스텀 위젯 삽입
+    sidebarcontentmanager.cpp
     ${MATERIAL_SOURCES}
 )
 
