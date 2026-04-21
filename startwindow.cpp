@@ -2,26 +2,66 @@
 #include "ui_startwindow.h"
 
 #include <QPixmap>
+#include <QGraphicsDropShadowEffect>
 
 StartWindow::StartWindow(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::StartWindow)
 {
     ui->setupUi(this);
+    QFont font;
+    font.setFamily("Roboto");
+    font.setBold(true);
+    QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect(this);
+    shadow->setBlurRadius(30);
+    shadow->setXOffset(0);
+    shadow->setYOffset(10);
+    shadow->setColor(QColor(0, 0, 0, 40));
     onLoginPageRequested();
+    ui->pageStack->setGraphicsEffect(shadow);
 
+    // set login page
     ui->pageLoginVerticalLayout->setAlignment(Qt::AlignCenter);
 
-    // ui->labelLoginLogo->setStyleSheet("border: 2px solid red;");
     ui->labelLoginLogo->setScaledContents(true);
     QPixmap logoImg(":/icon/resources/img/icon/placeholder-img-user.png");
     ui->labelLoginLogo->setPixmap(logoImg.scaled(200, 200, Qt::KeepAspectRatio));
 
+    ui->pageLoginLabelID->setFont(font);
+    ui->pageLoginLabelID->setFixedHeight(10);
+
+    ui->pageLoginEditID->setFixedHeight(50);
+
+    ui->pageLoginLabelPW->setFont(font);
+    ui->pageLoginLabelPW->setFixedHeight(10);
+
+    ui->pageLoginEditPW->setFixedHeight(50);
+
+    ui->pageLoginBtnLogin->setFixedHeight(60);
+    ui->pageLoginBtnLogin->setBackgroundColor(QColor("#F37321"));
+    ui->pageLoginBtnLogin->setForegroundColor(Qt::black);
+    ui->pageLoginBtnLogin->setOverlayColor(QColor("#E96917"));
+    ui->pageLoginBtnLogin->setOverlayStyle(Material::TintedOverlay);
+    ui->pageLoginBtnLogin->setCornerRadius(15);
+    ui->pageLoginBtnLogin->setFont(font);
+    ui->pageLoginBtnLogin->setFontSize(15);
+
+    ui->pageLoginBtnSignUp->setFixedHeight(60);
+    ui->pageLoginBtnSignUp->setBackgroundColor(QColor("#E0E0E0"));
+    ui->pageLoginBtnSignUp->setForegroundColor(Qt::black);
+    ui->pageLoginBtnSignUp->setCornerRadius(15);
+    ui->pageLoginBtnSignUp->setFont(font);
+    ui->pageLoginBtnSignUp->setFontSize(15);
+
+
+    // set slots
     connect(ui->pageLoginBtnLogin, SIGNAL(clicked()), this, SLOT(onLoginRequested()));
     connect(ui->pageLoginBtnSignUp, SIGNAL(clicked()), this, SLOT(onSignUpPageRequested()));
 
     connect(ui->pageSignUpBtnNext, SIGNAL(clicked()), this, SLOT(onSignUpNextBtnClicked()));
     connect(ui->pageSignUpBtnPrev, SIGNAL(clicked()), this, SLOT(onLoginPageRequested()));
+    connect(ui->pageSignUpCheckBoxPW, SIGNAL(clicked()), this, SLOT(onSignUpCheckBoxPWClicked()));
+    connect(ui->pageSignUpCheckBoxPWC, SIGNAL(clicked()), this, SLOT(onSignUpCheckBoxPWCClicked()));
 
     connect(ui->pageProfileBtnCreate, SIGNAL(clicked()), this, SLOT(onProfileCreateBtnClicked()));
     connect(ui->pageProfileBtnPrev, SIGNAL(clicked()), this, SLOT(onSignUpPageRequested()));
@@ -35,23 +75,26 @@ StartWindow::~StartWindow()
 }
 
 // slots
+
+// 로그인 페이지로 이동
 void StartWindow::onLoginPageRequested(){
-    // 로그인 페이지로 이동
     ui->pageStack->setCurrentWidget(ui->pageLogin);
     ui->pageLoginEditID->clear();
     ui->pageLoginEditPW->clear();
 }
 
+// 회원가입 페이지로 이동
 void StartWindow::onSignUpPageRequested(){
-    // 회원가입 페이지로 이동
     ui->pageStack->setCurrentWidget(ui->pageSignUp);
     ui->pageSignUpEditID->clear();
     ui->pageSignUpEditPW->clear();
     ui->pageSignUpEditPWC->clear();
+    ui->pageSignUpCheckBoxPW->setCheckState(Qt::Unchecked);
+    ui->pageSignUpCheckBoxPWC->setCheckState(Qt::Unchecked);
 }
 
+// 로그인 확인 후 메인윈도우로 이동
 void StartWindow::onLoginRequested(){
-    // 로그인 확인 후 메인윈도우로 이동
     id = ui->pageLoginEditID->text();
     pw = ui->pageLoginEditPW->text();
 
@@ -93,7 +136,26 @@ void StartWindow::onProfilePageRequested(){
     ui->pageProfileEdit_2->clear();
 }
 
+void StartWindow::onSignUpCheckBoxPWClicked(){
+    if (ui->pageSignUpCheckBoxPW->isChecked() == true){
+        ui->pageSignUpEditPW->setEchoMode(QtMaterialTextField::Normal);
+    }
+    else{
+        ui->pageSignUpEditPW->setEchoMode(QtMaterialTextField::Password);
+    }
+}
+
+void StartWindow::onSignUpCheckBoxPWCClicked(){
+    if (ui->pageSignUpCheckBoxPWC->isChecked() == true){
+        ui->pageSignUpEditPWC->setEchoMode(QtMaterialTextField::Normal);
+    }
+    else{
+        ui->pageSignUpEditPWC->setEchoMode(QtMaterialTextField::Password);
+    }
+}
+
+// TODO : 서버에 새 계정 정보 추가하는 로직
 void StartWindow::onProfileCreateBtnClicked(){
-    // TODO : 서버에 새 계정 정보 추가하는 로직
     onLoginPageRequested();
 }
+

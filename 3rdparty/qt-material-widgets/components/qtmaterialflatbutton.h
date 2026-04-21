@@ -3,6 +3,7 @@
 
 #include <QtWidgets/QPushButton>
 #include <QScopedPointer>
+#include <QEnterEvent>
 #include "lib/qtmaterialtheme.h"
 
 class QtMaterialFlatButtonPrivate;

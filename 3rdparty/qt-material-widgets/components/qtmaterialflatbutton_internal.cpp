@@ -63,10 +63,23 @@ QtMaterialFlatButtonStateMachine::QtMaterialFlatButtonStateMachine(QtMaterialFla
 
     addTransition(m_button, QEvent::FocusIn, m_neutralState, m_neutralFocusedState);
     addTransition(m_button, QEvent::FocusOut, m_neutralFocusedState, m_neutralState);
-    addTransition(m_button, QEvent::Enter, m_neutralState, m_hoveredState);
-    addTransition(m_button, QEvent::Leave, m_hoveredState, m_neutralState);
-    addTransition(m_button, QEvent::Enter, m_neutralFocusedState, m_hoveredFocusedState);
-    addTransition(m_button, QEvent::Leave, m_hoveredFocusedState, m_neutralFocusedState);
+    // addTransition(m_button, QEvent::Enter, m_neutralState, m_hoveredState);
+    // addTransition(m_button, QEvent::Leave, m_hoveredState, m_neutralState);
+    // addTransition(m_button, QEvent::Enter, m_neutralFocusedState, m_hoveredFocusedState);
+    // addTransition(m_button, QEvent::Leave, m_hoveredFocusedState, m_neutralFocusedState);
+    transition = new QtMaterialStateTransition(FlatButtonInTransition);
+    transition->setTargetState(m_hoveredState);
+    addTransition(transition, m_neutralState, m_hoveredState);
+
+    transition = new QtMaterialStateTransition(FlatButtonOutTransition);
+    addTransition(transition, m_hoveredState, m_neutralState);
+
+    transition = new QtMaterialStateTransition(FlatButtonInTransition);
+    addTransition(transition, m_neutralFocusedState, m_hoveredFocusedState);
+
+    transition = new QtMaterialStateTransition(FlatButtonOutTransition);
+    addTransition(transition, m_hoveredFocusedState, m_neutralFocusedState);
+
     addTransition(m_button, QEvent::FocusIn, m_hoveredState, m_hoveredFocusedState);
     addTransition(m_button, QEvent::FocusOut, m_hoveredFocusedState, m_hoveredState);
 
@@ -74,7 +87,10 @@ QtMaterialFlatButtonStateMachine::QtMaterialFlatButtonStateMachine(QtMaterialFla
     transition->setTargetState(m_pressedState);
     m_hoveredState->addTransition(transition);
 
-    addTransition(m_button, QEvent::Leave, m_pressedState, m_neutralFocusedState);
+    // addTransition(m_button, QEvent::Leave, m_pressedState, m_neutralFocusedState);
+    transition = new QtMaterialStateTransition(FlatButtonOutTransition);
+    addTransition(transition, m_pressedState, m_neutralFocusedState);
+
     addTransition(m_button, QEvent::FocusOut, m_pressedState, m_hoveredState);
 
     m_neutralState->assignProperty(this, "haloSize", 0);
@@ -195,6 +211,14 @@ bool QtMaterialFlatButtonStateMachine::eventFilter(QObject *watched,
             postEvent(new QtMaterialStateTransitionEvent(FlatButtonPressedTransition));
             return true;
         }
+    }
+    else if (QEvent::Enter == event->type()) {
+        postEvent(new QtMaterialStateTransitionEvent(FlatButtonInTransition));
+        return true;
+    }
+    else if (QEvent::Leave == event->type()) {
+        postEvent(new QtMaterialStateTransitionEvent(FlatButtonOutTransition));
+        return true;
     }
     return QStateMachine::eventFilter(watched, event);
 }

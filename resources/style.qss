@@ -86,5 +86,10 @@ QLabel.dayLabel {
 }
 
 StartWindow {
-    background-color: #F0F0F0;
+    background-color: #FFFFFF;
+}
+
+#pageStack {
+    background-color: #F5F7FB;
+    border-radius: 20px;
 }

@@ -18,9 +18,6 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
-protected:
-    bool eventFilter(QObject *obj, QEvent *event) override;
-
 private:
     Ui::MainWindow *ui;
 };

@@ -24,13 +24,18 @@ private:
     bool valid_chk();
 
 private slots:
+    // p1. Login
     void onLoginPageRequested();
     void onSignUpPageRequested();
     void onLoginRequested();
 
+    // p2. Sign Up
     void onSignUpNextBtnClicked();
     void onProfilePageRequested();
+    void onSignUpCheckBoxPWClicked();
+    void onSignUpCheckBoxPWCClicked();
 
+    // p3. Profile
     void onProfileCreateBtnClicked();
 };
 
