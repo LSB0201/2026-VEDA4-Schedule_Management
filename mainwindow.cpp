@@ -5,6 +5,7 @@
 #include "daycellwidget.h" // 커스텀 위젯 헤더 포함
 #include "sidebaropenclose.h"
 #include "sidebarcontentmanager.h"
+#include "scheduleinputview.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -72,6 +73,11 @@ MainWindow::MainWindow(QWidget *parent)
         }
     });
 
+    // Add Schedule; 버튼 클릭 시 입력 창 출력
+    connect(ui->addScheduleButton, &QPushButton::clicked, this, &MainWindow::showScheduleInput);
+    // 기존 일정 클릭 시 입력 창 띄우기(메니저의 시그널 사용)
+    connect(m_contentManager, &SidebarContentManager::scheduleItemClicked, this, &MainWindow::showScheduleInput);
+
     // 달력 그리기 실행
     generateCalendar(2026, 4);
 }
@@ -113,4 +119,12 @@ void MainWindow::generateCalendar(int year, int month) {
             row++;
         }
     }
+}
+
+void MainWindow::showScheduleInput() {
+    // 객체 생성
+    ScheduleInputView *inputView = new ScheduleInputView(this);
+
+    // ScheduleInputView 스스로 사이드바(ui->frame_2) 옆에 뜨도록 명령
+    inputView->showNextTo(ui->frame_2);
 }

@@ -16,6 +16,9 @@ public:
 private:
     QScrollArea *m_scrollArea;
     void clearLayout(QLayout *layout); // 내부 레이아웃 초기화용 도우미 함수
+
+signals:
+    void scheduleItemClicked(); // 메인 윈도우로 전달할 시그널
 };
 
 #endif // SIDEBARCONTENTMANAGER_H
