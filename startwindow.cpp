@@ -74,6 +74,34 @@ StartWindow::~StartWindow()
     delete ui;
 }
 
+// private
+
+bool StartWindow::valid_chk(){
+    id = ui->pageSignUpEditID->text();
+    pw = ui->pageSignUpEditPW->text();
+    pwc = ui->pageSignUpEditPWC->text();
+
+    // TODO : 아이디가 이미 존재하는지 검사하는 로직
+    // if (이미 존재){
+    //     ui->pageSignUpTooltip->setText("이미 존재하는 아이디입니다.");
+    // }
+
+    // TODO : 존재 로직 추가 후 else if로 수정하여 일관성 있게 사용
+    if (pw!=pwc){
+        ui->pageSignUpTooltip->setText("비밀번호가 일치하지 않습니다.");
+        return false;
+    }
+
+    else {
+        return true;
+    }
+}
+
+void onLoginFinished(bool success, QString message){
+
+}
+
+
 // slots
 
 // 로그인 페이지로 이동
@@ -103,26 +131,7 @@ void StartWindow::onLoginRequested(){
     accept();
 }
 
-bool StartWindow::valid_chk(){
-    id = ui->pageSignUpEditID->text();
-    pw = ui->pageSignUpEditPW->text();
-    pwc = ui->pageSignUpEditPWC->text();
 
-    // TODO : 아이디가 이미 존재하는지 검사하는 로직
-    // if (이미 존재){
-    //     ui->pageSignUpTooltip->setText("이미 존재하는 아이디입니다.");
-    // }
-
-    // TODO : 존재 로직 추가 후 else if로 수정하여 일관성 있게 사용
-    if (pw!=pwc){
-        ui->pageSignUpTooltip->setText("비밀번호가 일치하지 않습니다.");
-        return false;
-    }
-
-    else {
-        return true;
-    }
-}
 
 void StartWindow::onSignUpNextBtnClicked(){
     if(valid_chk())

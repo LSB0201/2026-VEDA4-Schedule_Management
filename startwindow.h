@@ -22,6 +22,7 @@ private:
     QString pwc;
     QString nickname;
     bool valid_chk();
+    void onLoginFinished(bool success, QString message);
 
 private slots:
     // p1. Login
