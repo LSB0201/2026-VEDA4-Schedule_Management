@@ -201,7 +201,7 @@ void MainWindow::showScheduleInput() {
 
 // slots
 void MainWindow::onLeftFrameHomeButtonClicked(){
-
+    ui->pageStack->setCurrentWidget()
 }
 
 void MainWindow::onLeftFrameCalendarButtonClicked(){
