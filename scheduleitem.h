@@ -2,6 +2,7 @@
 #define SCHEDULEITEM_H
 
 #include <QWidget>
+#include "schedulesave.h"
 
 namespace Ui {
 class ScheduleItem;
@@ -15,10 +16,10 @@ public:
     explicit ScheduleItem(QWidget *parent = nullptr);
     ~ScheduleItem();
 
+    void setScheduleData(const ScheduleData &data);
+
 private:
     Ui::ScheduleItem *ui;
-
-    void setItemColor(const QColor &color); // 사용자가 선택한 색상 반영
 
 signals:
     void itemClicked(); // 클릭 시그널 선언
