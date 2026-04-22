@@ -5,7 +5,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets Gui StateMachine)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets Gui StateMachine Network)
 
 set(MATERIAL_WIDGETS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/qt-material-widgets/components")
 
@@ -38,6 +38,8 @@ qt_add_executable(2026-VEDA4-Schedule_Management
     scheduleinputview.cpp # 일정 입력 or 수정 위젯
     scheduleinputview.h
     ScheduleInputView.ui
+    authmanager.cpp
+    authmanager.h
     ${MATERIAL_SOURCES}
 )
 
@@ -54,6 +56,7 @@ target_link_libraries(2026-VEDA4-Schedule_Management
         Qt::Widgets
         Qt::Gui
         Qt::StateMachine
+        Qt::Network
 )
 
 install(TARGETS 2026-VEDA4-Schedule_Management

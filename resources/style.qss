@@ -84,3 +84,12 @@ QLabel.dayLabel {
     font-size: 11px;
     text-transform: uppercase;
 }
+
+StartWindow {
+    background-color: #FFFFFF;
+}
+
+#pageStack {
+    background-color: #F5F7FB;
+    border-radius: 20px;
+}
