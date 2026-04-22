@@ -5,6 +5,7 @@
 #include <QPropertyAnimation>
 #include "sidebaropenclose.h"
 #include "sidebarcontentmanager.h"
+#include "schedulesave.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -28,6 +29,7 @@ private:
 
     SidebarOpenClose *m_sidebarController; // 사이드바 On/Off에 관한 객체
     SidebarContentManager *m_contentManager; // 사이드바 일정 표시에 관한 겍체
+    ScheduleSave *m_scheduleSave; // 일정 저장에 관한 객체
 
     void showScheduleInput(); // 입력 창 띄우는 함수 선언
 };

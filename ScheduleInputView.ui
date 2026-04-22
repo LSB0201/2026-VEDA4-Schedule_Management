@@ -67,9 +67,7 @@
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: #EF5350;
-border: none;
-border-radius: 15px;</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string/>
@@ -91,9 +89,7 @@ border-radius: 15px;</string>
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: #F37D2E;
-border: none;
-border-radius: 15px;</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string/>
@@ -115,9 +111,7 @@ border-radius: 15px;</string>
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: #FFEE58;
-border: none;
-border-radius: 15px;</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string/>
@@ -139,9 +133,7 @@ border-radius: 15px;</string>
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: #66BB6A;
-border: none;
-border-radius: 15px;</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string/>
@@ -163,9 +155,7 @@ border-radius: 15px;</string>
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: #42A5F5;
-border: none;
-border-radius: 15px;</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string/>

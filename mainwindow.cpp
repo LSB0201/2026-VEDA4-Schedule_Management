@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     // 객체 생성
     m_sidebarController = new SidebarOpenClose(ui->frame_2, ui->closeSideBar, this, this);
     m_contentManager = new SidebarContentManager(ui->scrollArea, this);
+    m_scheduleSave = new ScheduleSave(this);
 
     // QTableWidget 기본 형태 세팅
     ui->calendarTable->setRowCount(6);    // 최대 6주
@@ -124,6 +125,18 @@ void MainWindow::generateCalendar(int year, int month) {
 void MainWindow::showScheduleInput() {
     // 객체 생성
     ScheduleInputView *inputView = new ScheduleInputView(this);
+
+    // 입력창 종료시 메모리에서 자동 해제
+    inputView->setAttribute(Qt::WA_DeleteOnClose);
+
+    // InputView에서 저장을 요청 -> ScheduleSave가 처리
+    connect(inputView, &ScheduleInputView::saveRequested, m_scheduleSave, &ScheduleSave::saveSchedule);
+
+    // ScheduleSave가 저장을 완료 -> 스크롤뷰나 달력을 갱신하도록 연결
+    connect(m_scheduleSave, &ScheduleSave::scheduleSavedSuccessfully, this, [=](){
+        // 현재 선택된 날짜의 일정을 다시 불러오는 로직
+        // m_contentManager->loadSchedulesForDate(...);
+    });
 
     // ScheduleInputView 스스로 사이드바(ui->frame_2) 옆에 뜨도록 명령
     inputView->showNextTo(ui->frame_2);
