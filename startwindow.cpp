@@ -76,6 +76,14 @@ StartWindow::StartWindow(QWidget *parent)
     ui->pageLoginCheckBoxAutoLogin->hide();
     ui->pageLoginCheckBoxAutoLogin->setEnabled(false);
     ui->pageLoginLabelForgotPW->hide();
+
+    // profile 세부속성 입력 비활성화
+    ui->pageProfileLabelEdit1->hide();
+    ui->pageProfileEdit_1->hide();
+    ui->pageProfileEdit_1->setEnabled(false);
+    ui->pageProfileLabelEdit2->hide();
+    ui->pageProfileEdit_2->hide();
+    ui->pageProfileEdit_2->setEnabled(false);
 }
 
 StartWindow::~StartWindow()
