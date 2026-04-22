@@ -12,6 +12,13 @@ void AuthManager::handleResponse(QNetworkReply *reply, std::function<void(const 
         QJsonDocument doc = QJsonDocument::fromJson(data);
         QJsonObject obj = doc.object();
 
+        // 콘솔에서 에러 내용 확인
+        if (reply->error() != QNetworkReply::NoError) {
+            qDebug() << "Network Error Code:" << reply->error();
+            qDebug() << "Error String:" << reply->errorString();
+            qDebug() << "Raw Data from Server:" << data;
+        }
+
         if (reply->error() == QNetworkReply::NoError) {
             // 성공 (HTTP 200)
             callback(obj, true);

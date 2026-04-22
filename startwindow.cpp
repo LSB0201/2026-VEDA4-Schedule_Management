@@ -25,8 +25,10 @@ StartWindow::StartWindow(QWidget *parent)
     ui->pageLoginVerticalLayout->setAlignment(Qt::AlignCenter);
 
     ui->labelLoginLogo->setScaledContents(true);
-    QPixmap logoImg(":/icon/resources/img/icon/placeholder-img-user.png");
-    ui->labelLoginLogo->setPixmap(logoImg.scaled(200, 200, Qt::KeepAspectRatio));
+    QPixmap logoImg(":/icon/resources/img/icon/main.png");
+    ui->labelLoginLogo->setPixmap(logoImg.scaled(50, 50));
+    ui->labelLoginLogo->setMargin(50);
+    ui->labelLoginLogo->hide();
 
     ui->pageLoginLabelID->setFont(font);
     ui->pageLoginLabelID->setFixedHeight(10);
@@ -54,6 +56,38 @@ StartWindow::StartWindow(QWidget *parent)
     ui->pageLoginBtnSignUp->setFont(font);
     ui->pageLoginBtnSignUp->setFontSize(15);
 
+    ui->pageSignUpBtnNext->setFixedHeight(60);
+    ui->pageSignUpBtnNext->setBackgroundColor(QColor("#F37321"));
+    ui->pageSignUpBtnNext->setForegroundColor(Qt::black);
+    ui->pageSignUpBtnNext->setOverlayColor(QColor("#E96917"));
+    ui->pageSignUpBtnNext->setOverlayStyle(Material::TintedOverlay);
+    ui->pageSignUpBtnNext->setCornerRadius(15);
+    ui->pageSignUpBtnNext->setFont(font);
+    ui->pageSignUpBtnNext->setFontSize(15);
+
+    ui->pageSignUpBtnPrev->setFixedHeight(60);
+    ui->pageSignUpBtnPrev->setBackgroundColor(QColor("#E0E0E0"));
+    ui->pageSignUpBtnPrev->setForegroundColor(Qt::black);
+    ui->pageSignUpBtnPrev->setCornerRadius(15);
+    ui->pageSignUpBtnPrev->setFont(font);
+    ui->pageSignUpBtnPrev->setFontSize(15);
+
+    ui->pageProfileBtnCreate->setFixedHeight(60);
+    ui->pageProfileBtnCreate->setBackgroundColor(QColor("#F37321"));
+    ui->pageProfileBtnCreate->setForegroundColor(Qt::black);
+    ui->pageProfileBtnCreate->setOverlayColor(QColor("#E96917"));
+    ui->pageProfileBtnCreate->setOverlayStyle(Material::TintedOverlay);
+    ui->pageProfileBtnCreate->setCornerRadius(15);
+    ui->pageProfileBtnCreate->setFont(font);
+    ui->pageProfileBtnCreate->setFontSize(15);
+
+    ui->pageProfileBtnPrev->setFixedHeight(60);
+    ui->pageProfileBtnPrev->setBackgroundColor(QColor("#E0E0E0"));
+    ui->pageProfileBtnPrev->setForegroundColor(Qt::black);
+    ui->pageProfileBtnPrev->setCornerRadius(15);
+    ui->pageProfileBtnPrev->setFont(font);
+    ui->pageProfileBtnPrev->setFontSize(15);
+
 
     // set slots
     connect(ui->pageLoginBtnLogin, SIGNAL(clicked()), this, SLOT(onLoginRequested()));
@@ -72,6 +106,18 @@ StartWindow::StartWindow(QWidget *parent)
     connect(ui->pageProfileBtnPrev, SIGNAL(clicked()), this, SLOT(onSignUpPageRequested()));
 
     // TODO : 연결 이후 자동 로그인을 체크해두었는지 확인
+    // 자동 로그인 구현할 시간이 부족하여 비활성화
+    ui->pageLoginCheckBoxAutoLogin->hide();
+    ui->pageLoginCheckBoxAutoLogin->setEnabled(false);
+    ui->pageLoginLabelForgotPW->hide();
+
+    // profile 세부속성 입력 비활성화
+    ui->pageProfileLabelEdit1->hide();
+    ui->pageProfileEdit_1->hide();
+    ui->pageProfileEdit_1->setEnabled(false);
+    ui->pageProfileLabelEdit2->hide();
+    ui->pageProfileEdit_2->hide();
+    ui->pageProfileEdit_2->setEnabled(false);
 }
 
 StartWindow::~StartWindow()
@@ -115,7 +161,10 @@ void StartWindow::onSignUpPageRequested(){
 void StartWindow::onLoginRequested(){
     id = ui->pageLoginEditID->text();
     pw = ui->pageLoginEditPW->text();
-    if(id.isEmpty() || pw.isEmpty()) return;
+    if(id.isEmpty() || pw.isEmpty()){
+        QMessageBox::warning(this, "로그인 실패", "ID와 PW를 입력해주세요");
+        return;
+    }
 
     // TODO : 자동 로그인 확인 로직 추가
 
