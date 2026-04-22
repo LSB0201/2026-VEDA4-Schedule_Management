@@ -44,6 +44,7 @@ ScheduleInputView::ScheduleInputView(QWidget *parent)
 
     // 기본 선택값 설정
     ui->orangeColorButton->setChecked(true);
+    m_selectedColor = QColor("#FF9800");
 
     // 버튼이 클릭되었을 때 색상 값을 변수(m_selectedColor)에 저장하도록 시그널 연결
     connect(m_colorGroup, &QButtonGroup::buttonClicked, this, &ScheduleInputView::onColorButtonClicked);
@@ -83,29 +84,6 @@ void ScheduleInputView::onColorButtonClicked(QAbstractButton *button) {
     }
 }
 
-void ScheduleInputView::onSaveClicked() {
-    // 제목 필수 입력 확인
-    if (ui->lineEdit->text().trimmed().isEmpty()) {
-        QMessageBox::warning(this, "입력 오류", "일정 제목을 입력해주세요.");
-        return;
-    }
-
-    // 구조체에 데이터 저장
-    ScheduleData newData;
-    newData.title = ui->lineEdit->text();
-    newData.color = m_selectedColor;
-    newData.startDate = ui->dateEdit->date();
-    newData.startTime = ui->timeEdit->time();
-    newData.endDate = ui->dateEdit_2->date();
-    newData.endTime = ui->timeEdit_2->time();
-    newData.memo = ui->textEdit->toPlainText();
-
-    // 포장한 데이터를 시그널로 발송
-    emit saveRequested(newData);
-
-    this->close();
-}
-
 void ScheduleInputView::setDefaultDate(const QDate &date) {
     ui->dateEdit->setDate(date);
     ui->dateEdit_2->setDate(date);
@@ -134,7 +112,6 @@ void ScheduleInputView::setEditData(const ScheduleData &data) {
     else ui->orangeColorButton->setChecked(true); // 기본값
 }
 
-// --- 기존 onSaveClicked() 함수 내용을 아래로 '수정' ---
 void ScheduleInputView::onSaveClicked() {
     if (ui->lineEdit->text().trimmed().isEmpty()) {
         QMessageBox::warning(this, "입력 오류", "일정 제목을 입력해주세요.");
