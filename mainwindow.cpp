@@ -201,31 +201,29 @@ void MainWindow::showScheduleInput() {
 
 // slots
 void MainWindow::onLeftFrameHomeButtonClicked(){
-    ui->pageStack->setCurrentWidget()
+    ui->pageStack->setCurrentWidget(ui->pageCalendar);
 }
 
 void MainWindow::onLeftFrameCalendarButtonClicked(){
-
+    ui->pageStack->setCurrentWidget(ui->pageCalendar);
 }
 
 // stackedwidget이 없어서 주석처리함
 void MainWindow::onLeftFrameSearchButtonClicked() {
-    qDebug() << "검색창 전환 버튼 눌림";
     // ScheduleSearchView *searchView = new ScheduleSearchView(this);
 
     // // 팀원이 제공할 JSON 데이터를 가져와서 전달
     // QJsonArray dummyData = loadJsonFromFile("data.json");
     // searchView->setScheduleData(dummyData);
 
-    // // 기존의 centralWidget 내용을 searchView로 교체하거나 StackedWidget에 추가
-    // ui->stackedWidget->addWidget(searchView);
-    // ui->stackedWidget->setCurrentWidget(searchView);
+    ui->pageStack->setCurrentWidget(ui->pageSearch);
 }
 
 void MainWindow::onLeftFrameProfileButtonClicked(){
-
+    ui->pageStack->setCurrentWidget(ui->pageProfile);
 }
 
 void MainWindow::onLeftFrameLogoutButtonClicked(){
-
+    qDebug() << "로그아웃 버튼 누름";
+    // TODO : 로그아웃 구현 (개인정보로 이동)
 }
