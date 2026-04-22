@@ -40,7 +40,7 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
-        <widget class="QPushButton" name="calendarButton_1">
+        <widget class="QPushButton" name="leftFrameBtnHome">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -85,7 +85,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="calendarButton_2">
+        <widget class="QPushButton" name="leftFrameBtnCalendar">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -130,7 +130,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="profileButton_2">
+        <widget class="QPushButton" name="leftFrameBtnProfile">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -175,7 +175,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="searchButton">
+        <widget class="QPushButton" name="leftFrameBtnSchedule">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -217,7 +217,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="logoutButton">
+        <widget class="QPushButton" name="leftFrameBtnLogout">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -251,10 +251,10 @@
     <item>
      <widget class="QStackedWidget" name="pageStack">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="pageCalendar">
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>0</x>

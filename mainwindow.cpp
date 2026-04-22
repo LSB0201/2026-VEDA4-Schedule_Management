@@ -111,7 +111,7 @@ MainWindow::MainWindow(QWidget *parent)
     // 기존 일정 클릭 시 입력 창 띄우기 (매니저의 시그널 사용)
     connect(m_contentManager, &SidebarContentManager::scheduleItemClicked, this, &MainWindow::showScheduleInput);
 
-    connect(ui->searchButton, &QPushButton::clicked, this, &MainWindow::onSearchButtonClicked);
+    connect(ui->leftFrameBtnSchedule, &QPushButton::clicked, this, &MainWindow::onSearchButtonClicked);
 
     // 프로그램 시작 시 최초 달력 그리기
     generateCalendar(m_currentYear, m_currentMonth);
