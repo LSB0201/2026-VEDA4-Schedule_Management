@@ -115,7 +115,10 @@ void StartWindow::onSignUpPageRequested(){
 void StartWindow::onLoginRequested(){
     id = ui->pageLoginEditID->text();
     pw = ui->pageLoginEditPW->text();
-    if(id.isEmpty() || pw.isEmpty()) return;
+    if(id.isEmpty() || pw.isEmpty()){
+        QMessageBox::warning(this, "로그인 실패", "ID와 PW를 입력해주세요");
+        return;
+    }
 
     // TODO : 자동 로그인 확인 로직 추가
 
