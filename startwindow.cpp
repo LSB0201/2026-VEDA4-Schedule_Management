@@ -72,6 +72,10 @@ StartWindow::StartWindow(QWidget *parent)
     connect(ui->pageProfileBtnPrev, SIGNAL(clicked()), this, SLOT(onSignUpPageRequested()));
 
     // TODO : 연결 이후 자동 로그인을 체크해두었는지 확인
+    // 자동 로그인 구현할 시간이 부족하여 비활성화
+    ui->pageLoginCheckBoxAutoLogin->hide();
+    ui->pageLoginCheckBoxAutoLogin->setEnabled(false);
+    ui->pageLoginLabelForgotPW->hide();
 }
 
 StartWindow::~StartWindow()

@@ -45,7 +45,7 @@
         <enum>QFrame::Shape::Box</enum>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="pageLogin">
         <widget class="QWidget" name="verticalLayoutWidget">
@@ -202,14 +202,14 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_2">
               <item>
-               <widget class="QCheckBox" name="checkBox">
+               <widget class="QCheckBox" name="pageLoginCheckBoxAutoLogin">
                 <property name="text">
                  <string>Auto-login</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="label_3">
+               <widget class="QLabel" name="pageLoginLabelForgotPW">
                 <property name="layoutDirection">
                  <enum>Qt::LayoutDirection::LeftToRight</enum>
                 </property>
@@ -772,6 +772,11 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>QtMaterialRaisedButton</class>
+   <extends>QPushButton</extends>
+   <header>qtmaterialraisedbutton.h</header>
+  </customwidget>
+  <customwidget>
    <class>QtMaterialFlatButton</class>
    <extends>QPushButton</extends>
    <header>qtmaterialflatbutton.h</header>
@@ -780,11 +785,6 @@
    <class>QtMaterialTextField</class>
    <extends>QLineEdit</extends>
    <header>qtmaterialtextfield.h</header>
-  </customwidget>
-  <customwidget>
-   <class>QtMaterialRaisedButton</class>
-   <extends>QPushButton</extends>
-   <header>qtmaterialraisedbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
