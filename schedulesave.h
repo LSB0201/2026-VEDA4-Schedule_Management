@@ -34,6 +34,8 @@ public:
 
     // 일정 저장 함수
     bool saveSchedule(const ScheduleData &data);
+    // 특정 날짜의 일정 목록을 가져오는 함수
+    QList<ScheduleData> getSchedulesForDate(const QDate &date) const;
 
 private:
     QList<ScheduleData> m_schedules; // 메모리에 유지할 일정 리스트

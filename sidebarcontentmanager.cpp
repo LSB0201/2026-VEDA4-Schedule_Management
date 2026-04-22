@@ -8,7 +8,7 @@ SidebarContentManager::SidebarContentManager(QScrollArea *scrollArea, QObject *p
 {
 }
 
-void SidebarContentManager::loadSchedulesForDate(const QDate &date) {
+void SidebarContentManager::loadSchedules(const QList<ScheduleData> &schedules) {
     QWidget *contents = m_scrollArea->widget();
     if (!contents) return;
 
@@ -18,23 +18,24 @@ void SidebarContentManager::loadSchedulesForDate(const QDate &date) {
         layout = new QVBoxLayout(contents);
         contents->setLayout(layout);
     } else {
-        clearLayout(layout); // 기존 아이템 모두 삭제
+        // 2. 기존 위젯들 삭제
+        clearLayout(layout);
     }
 
-    // 2. 테스트용 데이터 삽입 (선택된 날짜 기반)
-    // 추후 이 부분에 DB나 배열에서 date에 해당하는 일정을 검색하는 로직이 들어갑니다.
-    for (int i = 0; i < 3; ++i) {
+    // 3. 실제 데이터(JSON에서 불러온 데이터) 삽입
+    for (const ScheduleData &data : schedules) {
         ScheduleItem *item = new ScheduleItem(contents);
+
+        // ScheduleItem에 실제 데이터 세팅 (시간, 제목, 내용, 색상 반영)
+        item->setScheduleData(data);
 
         // 아이템이 클릭되면 매니저의 시그널도 같이 발생하도록 연결
         connect(item, &ScheduleItem::itemClicked, this, &SidebarContentManager::scheduleItemClicked);
 
-        // item->setData("09:00", "프로젝트 회의", "내용..."); // 데이터 입력
-
         layout->addWidget(item);
     }
 
-    // 3. 위젯들이 위쪽으로 정렬을 위한 하단 여백 추가
+    // 4. 위젯들을 위쪽으로 정렬하기 위한 빈 공간(스페이서) 추가
     layout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
 }
 

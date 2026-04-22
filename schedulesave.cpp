@@ -63,3 +63,14 @@ ScheduleData ScheduleData::fromJson(const QJsonObject &json) {
     data.memo = json["memo"].toString();
     return data;
 }
+
+QList<ScheduleData> ScheduleSave::getSchedulesForDate(const QDate &date) const {
+    QList<ScheduleData> result;
+    for (const ScheduleData &data : m_schedules) {
+        // 일정이 시작 날짜와 종료 날짜 사이에 포함되는지 확인
+        if (date >= data.startDate && date <= data.endDate) {
+            result.append(data);
+        }
+    }
+    return result;
+}

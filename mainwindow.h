@@ -25,12 +25,16 @@ protected:
 
 private:
     Ui::MainWindow *ui;
-    void generateCalendar(int year, int month);
+
+    int m_currentYear;
+    int m_currentMonth;
 
     SidebarOpenClose *m_sidebarController; // 사이드바 On/Off에 관한 객체
     SidebarContentManager *m_contentManager; // 사이드바 일정 표시에 관한 겍체
     ScheduleSave *m_scheduleSave; // 일정 저장에 관한 객체
 
     void showScheduleInput(); // 입력 창 띄우는 함수 선언
+    void updateMonthLabel(); // 상단 라벨 텍스트를 갱신하는 함수
+    void generateCalendar(int year, int month);
 };
 #endif // MAINWINDOW_H
