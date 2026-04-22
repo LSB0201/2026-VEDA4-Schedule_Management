@@ -1,6 +1,11 @@
 <RCC>
     <qresource prefix="/icon">
         <file>resources/img/icon/placeholder-img-user.png</file>
+        <file>resources/img/icon/main.png</file>
+        <file>resources/img/icon/calendar.png</file>
+        <file>resources/img/icon/profile.png</file>
+        <file>resources/img/icon/search.png</file>
+        <file>resources/img/icon/logout.png</file>
     </qresource>
     <qresource prefix="/background">
         <file>resources/img/background/placeholder-img-background.png</file>

@@ -22,7 +22,7 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>100</width>
+        <width>80</width>
         <height>0</height>
        </size>
       </property>
@@ -40,7 +40,7 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
-        <widget class="QWidget" name="goCalendarWidget2" native="true">
+        <widget class="QPushButton" name="calendarButton_1">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -48,6 +48,19 @@
           </size>
          </property>
          <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/icon/resources/img/icon/main.png</normaloff>:/icon/resources/img/icon/main.png</iconset>
+         </property>
+         <property name="iconSize">
           <size>
            <width>50</width>
            <height>50</height>
@@ -72,7 +85,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QWidget" name="goCalendarWidget1" native="true">
+        <widget class="QPushButton" name="calendarButton_2">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -80,6 +93,19 @@
           </size>
          </property>
          <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>42</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/icon/resources/img/icon/calendar.png</normaloff>:/icon/resources/img/icon/calendar.png</iconset>
+         </property>
+         <property name="iconSize">
           <size>
            <width>50</width>
            <height>50</height>
@@ -104,7 +130,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QWidget" name="goProfileWidget1" native="true">
+        <widget class="QPushButton" name="profileButton_2">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -112,6 +138,19 @@
           </size>
          </property>
          <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>47</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/icon/resources/img/icon/profile.png</normaloff>:/icon/resources/img/icon/profile.png</iconset>
+         </property>
+         <property name="iconSize">
           <size>
            <width>50</width>
            <height>50</height>
@@ -136,7 +175,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QWidget" name="goSearchWidget" native="true">
+        <widget class="QPushButton" name="searchButton">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -144,6 +183,19 @@
           </size>
          </property>
          <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/icon/resources/img/icon/search.png</normaloff>:/icon/resources/img/icon/search.png</iconset>
+         </property>
+         <property name="iconSize">
           <size>
            <width>50</width>
            <height>50</height>
@@ -165,7 +217,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QWidget" name="logoutWidget" native="true">
+        <widget class="QPushButton" name="logoutButton">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -173,6 +225,19 @@
           </size>
          </property>
          <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/icon/resources/img/icon/logout.png</normaloff>:/icon/resources/img/icon/logout.png</iconset>
+         </property>
+         <property name="iconSize">
           <size>
            <width>50</width>
            <height>50</height>
@@ -193,7 +258,7 @@
         <property name="frameShadow">
          <enum>QFrame::Shadow::Raised</enum>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
@@ -208,7 +273,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QWidget" name="goProfileWidget2" native="true">
+          <widget class="QPushButton" name="profileButton_1">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -221,6 +286,19 @@
              <height>70</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/icon/resources/img/icon/placeholder-img-user.png</normaloff>:/icon/resources/img/icon/placeholder-img-user.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
           </widget>
          </item>
         </layout>
@@ -229,23 +307,19 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QCalendarWidget" name="calendarWidget">
-          <property name="verticalHeaderFormat">
-           <enum>QCalendarWidget::VerticalHeaderFormat::NoVerticalHeader</enum>
-          </property>
-         </widget>
+         <widget class="QTableWidget" name="calendarTable"/>
         </item>
         <item>
          <widget class="QFrame" name="frame_2">
           <property name="minimumSize">
            <size>
-            <width>100</width>
+            <width>200</width>
             <height>0</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>200</width>
+            <width>300</width>
             <height>16777215</height>
            </size>
           </property>
@@ -256,21 +330,47 @@
            <enum>QFrame::Shadow::Raised</enum>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_3">
-           <property name="spacing">
-            <number>10</number>
-           </property>
            <item>
-            <widget class="QLabel" name="todayLabel">
-             <property name="font">
-              <font>
-               <pointsize>15</pointsize>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>TextLabel</string>
-             </property>
-            </widget>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <widget class="QLabel" name="todayLabel">
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>TextLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="closeSideBar">
+               <property name="minimumSize">
+                <size>
+                 <width>40</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>40</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>&gt;&gt;</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
             <widget class="QScrollArea" name="scrollArea">
@@ -282,45 +382,27 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>178</width>
-                <height>542</height>
+                <width>274</width>
+                <height>514</height>
                </rect>
               </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+              <layout class="QVBoxLayout" name="verticalLayout_5"/>
              </widget>
             </widget>
            </item>
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_2">
              <item>
-              <widget class="QWidget" name="addScheduleWidget" native="true">
-               <property name="minimumSize">
-                <size>
-                 <width>175</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>300</width>
-                 <height>70</height>
-                </size>
+              <widget class="QtMaterialRaisedButton" name="addScheduleButton">
+               <property name="text">
+                <string>Add Schedule</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QWidget" name="deleteScheduleWidget" native="true">
-               <property name="minimumSize">
-                <size>
-                 <width>175</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>300</width>
-                 <height>70</height>
-                </size>
+              <widget class="QtMaterialRaisedButton" name="deleteScheduleButton">
+               <property name="text">
+                <string>Delete Schedule</string>
                </property>
               </widget>
              </item>
@@ -341,12 +423,21 @@
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <customwidgets>
+  <customwidget>
+   <class>QtMaterialRaisedButton</class>
+   <extends>QPushButton</extends>
+   <header>qtmaterialraisedbutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
