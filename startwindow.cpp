@@ -25,8 +25,10 @@ StartWindow::StartWindow(QWidget *parent)
     ui->pageLoginVerticalLayout->setAlignment(Qt::AlignCenter);
 
     ui->labelLoginLogo->setScaledContents(true);
-    QPixmap logoImg(":/icon/resources/img/icon/placeholder-img-user.png");
-    ui->labelLoginLogo->setPixmap(logoImg.scaled(200, 200, Qt::KeepAspectRatio));
+    QPixmap logoImg(":/icon/resources/img/icon/main.png");
+    ui->labelLoginLogo->setPixmap(logoImg.scaled(50, 50));
+    ui->labelLoginLogo->setMargin(50);
+    ui->labelLoginLogo->hide();
 
     ui->pageLoginLabelID->setFont(font);
     ui->pageLoginLabelID->setFixedHeight(10);
