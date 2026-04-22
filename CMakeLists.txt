@@ -38,6 +38,8 @@ qt_add_executable(2026-VEDA4-Schedule_Management
     scheduleinputview.cpp # 일정 입력 or 수정 위젯
     scheduleinputview.h
     ScheduleInputView.ui
+    authmanager.cpp
+    authmanager.h
     ${MATERIAL_SOURCES}
 )
 

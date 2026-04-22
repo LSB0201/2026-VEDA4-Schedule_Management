@@ -2,6 +2,7 @@
 #define STARTWINDOW_H
 
 #include <QDialog>
+#include "authmanager.h"
 
 namespace Ui {
 class StartWindow;
@@ -21,8 +22,9 @@ private:
     QString pw;
     QString pwc;
     QString nickname;
+    AuthManager* authManager = new AuthManager(this);
     bool valid_chk();
-    void onLoginFinished(bool success, QString message);
+    void onLoginFinished(bool success, QString message, QString userName);
 
 private slots:
     // p1. Login
@@ -35,9 +37,11 @@ private slots:
     void onProfilePageRequested();
     void onSignUpCheckBoxPWClicked();
     void onSignUpCheckBoxPWCClicked();
+    void onIdCheckFinished(bool available, QString message);
 
     // p3. Profile
     void onProfileCreateBtnClicked();
+    void onRegisterFinished(bool success, QString message);
 };
 
 #endif // STARTWINDOW_H

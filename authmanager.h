@@ -27,6 +27,7 @@ signals:
 private:
     QNetworkAccessManager *manager;
     QString baseUrl = "https://dev.vlolet.com/api";
+    void handleResponse(QNetworkReply *reply, std::function<void(const QJsonObject&, bool)> callback);
 };
 
 #endif

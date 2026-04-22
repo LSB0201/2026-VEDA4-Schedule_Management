@@ -3,6 +3,7 @@
 
 #include <QPixmap>
 #include <QGraphicsDropShadowEffect>
+#include <QMessageBox>
 
 StartWindow::StartWindow(QWidget *parent)
     : QDialog(parent)
@@ -56,14 +57,18 @@ StartWindow::StartWindow(QWidget *parent)
 
     // set slots
     connect(ui->pageLoginBtnLogin, SIGNAL(clicked()), this, SLOT(onLoginRequested()));
+    connect(authManager, &AuthManager::loginFinished, this, &StartWindow::onLoginFinished);
     connect(ui->pageLoginBtnSignUp, SIGNAL(clicked()), this, SLOT(onSignUpPageRequested()));
 
     connect(ui->pageSignUpBtnNext, SIGNAL(clicked()), this, SLOT(onSignUpNextBtnClicked()));
+    connect(authManager, &AuthManager::idCheckFinished, this, &StartWindow::onIdCheckFinished);
+
     connect(ui->pageSignUpBtnPrev, SIGNAL(clicked()), this, SLOT(onLoginPageRequested()));
     connect(ui->pageSignUpCheckBoxPW, SIGNAL(clicked()), this, SLOT(onSignUpCheckBoxPWClicked()));
     connect(ui->pageSignUpCheckBoxPWC, SIGNAL(clicked()), this, SLOT(onSignUpCheckBoxPWCClicked()));
 
     connect(ui->pageProfileBtnCreate, SIGNAL(clicked()), this, SLOT(onProfileCreateBtnClicked()));
+    connect(authManager, &AuthManager::registerFinished, this, &StartWindow::onRegisterFinished);
     connect(ui->pageProfileBtnPrev, SIGNAL(clicked()), this, SLOT(onSignUpPageRequested()));
 
     // TODO : 연결 이후 자동 로그인을 체크해두었는지 확인
@@ -76,29 +81,13 @@ StartWindow::~StartWindow()
 
 // private
 
-bool StartWindow::valid_chk(){
-    id = ui->pageSignUpEditID->text();
-    pw = ui->pageSignUpEditPW->text();
-    pwc = ui->pageSignUpEditPWC->text();
-
-    // TODO : 아이디가 이미 존재하는지 검사하는 로직
-    // if (이미 존재){
-    //     ui->pageSignUpTooltip->setText("이미 존재하는 아이디입니다.");
-    // }
-
-    // TODO : 존재 로직 추가 후 else if로 수정하여 일관성 있게 사용
-    if (pw!=pwc){
-        ui->pageSignUpTooltip->setText("비밀번호가 일치하지 않습니다.");
-        return false;
+void StartWindow::onLoginFinished(bool success, QString message, QString userName){
+    if (success) {
+        qDebug() << "로그인 성공: " << userName;
+        accept(); // 성공 시 다이얼로그를 닫고 메인윈도우로 진입
+    } else {
+        QMessageBox::warning(this, "로그인 실패", message);
     }
-
-    else {
-        return true;
-    }
-}
-
-void onLoginFinished(bool success, QString message){
-
 }
 
 
@@ -114,6 +103,7 @@ void StartWindow::onLoginPageRequested(){
 // 회원가입 페이지로 이동
 void StartWindow::onSignUpPageRequested(){
     ui->pageStack->setCurrentWidget(ui->pageSignUp);
+    ui->pageSignUpTooltip->setText("Create your Account !");
     ui->pageSignUpEditID->clear();
     ui->pageSignUpEditPW->clear();
     ui->pageSignUpEditPWC->clear();
@@ -125,17 +115,45 @@ void StartWindow::onSignUpPageRequested(){
 void StartWindow::onLoginRequested(){
     id = ui->pageLoginEditID->text();
     pw = ui->pageLoginEditPW->text();
+    if(id.isEmpty() || pw.isEmpty()) return;
 
-    // TODO : 로그인 확인 로직 추가
+    // TODO : 자동 로그인 확인 로직 추가
 
-    accept();
+    authManager->login(id, pw);
 }
 
-
-
 void StartWindow::onSignUpNextBtnClicked(){
-    if(valid_chk())
+    id = ui->pageSignUpEditID->text();
+    pw = ui->pageSignUpEditPW->text();
+    pwc = ui->pageSignUpEditPWC->text();
+
+    QRegularExpression idRegex("^[a-zA-Z0-9]{4,12}$");
+    if (!idRegex.match(id).hasMatch()) {
+        ui->pageSignUpTooltip->setText("아이디는 4~12자 영문/숫자만 가능합니다.");
+        return;
+    }
+
+    if(pw.length() < 8){
+        ui->pageSignUpTooltip->setText("비밀번호는 8자리 이상이어야 합니다.");
+        return;
+    }
+
+    if (pw!=pwc){
+        ui->pageSignUpTooltip->setText("비밀번호가 일치하지 않습니다.");
+        return;
+    }
+
+    authManager->checkId(id);
+}
+
+// AuthManager로부터 ID 체크 결과를 받았을 때
+void StartWindow::onIdCheckFinished(bool available, QString message) {
+    if (available) {
         onProfilePageRequested();
+    } else {
+        // 서버에서 온 에러 메시지(중복 등) 표시
+        QMessageBox::warning(this, "확인", message);
+    }
 }
 
 void StartWindow::onProfilePageRequested(){
@@ -163,8 +181,20 @@ void StartWindow::onSignUpCheckBoxPWCClicked(){
     }
 }
 
-// TODO : 서버에 새 계정 정보 추가하는 로직
 void StartWindow::onProfileCreateBtnClicked(){
-    onLoginPageRequested();
+    nickname = ui->pageProfileEditNickname->text();
+    if(nickname.isEmpty()) {
+        QMessageBox::warning(this, "알림", "닉네임을 입력해주세요.");
+        return;
+    }
+    authManager->registerUser(id, pw, nickname);
 }
 
+void StartWindow::onRegisterFinished(bool success, QString message) {
+    if (success) {
+        QMessageBox::information(this, "가입 완료", "회원가입이 완료되었습니다. 로그인해주세요.");
+        onLoginPageRequested(); // 로그인 페이지로 이동
+    } else {
+        QMessageBox::critical(this, "가입 실패", message);
+    }
+}
