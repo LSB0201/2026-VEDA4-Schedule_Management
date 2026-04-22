@@ -164,6 +164,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->leftFrameBtnProfile, &QPushButton::clicked, this, &MainWindow::onLeftFrameProfileButtonClicked);
     connect(ui->leftFrameBtnLogout, &QPushButton::clicked, this, &MainWindow::onLeftFrameLogoutButtonClicked);
 
+    // 구현 실패한 기능 버튼 비활성화(profile, logout)
+    ui->leftFrameBtnProfile->hide();
+    ui->leftFrameBtnProfile->setEnabled(false);
+    ui->leftFrameBtnLogout->hide();
+    ui->leftFrameBtnLogout->setEnabled(false);
+
     // 프로그램 시작 시 최초 달력 그리기
     generateCalendar(m_currentYear, m_currentMonth);
 }
@@ -261,7 +267,6 @@ void MainWindow::onLeftFrameCalendarButtonClicked(){
     ui->pageStack->setCurrentWidget(ui->pageCalendar);
 }
 
-// stackedwidget이 없어서 주석처리함
 void MainWindow::onLeftFrameSearchButtonClicked() {
     QDir dir(QCoreApplication::applicationDirPath());
     dir.cdUp();
@@ -276,8 +281,9 @@ void MainWindow::onLeftFrameSearchButtonClicked() {
     if (!m_searchView) {
         m_searchView = new ScheduleSearchView(this);
 
-        // ui->pageSearch에 레이아웃이 없다면 생성해줍니다.
+        // ui->pageSearch에 레이아웃이 없다면 생성
         if (!ui->pageSearch->layout()) {
+            qDebug() << "검색 레이아웃 생성";
             QVBoxLayout *layout = new QVBoxLayout(ui->pageSearch);
             layout->setContentsMargins(0,0,0,0);
             ui->pageSearch->setLayout(layout);
@@ -297,5 +303,6 @@ void MainWindow::onLeftFrameProfileButtonClicked(){
 
 void MainWindow::onLeftFrameLogoutButtonClicked(){
     qDebug() << "로그아웃 버튼 누름";
-    // TODO : 로그아웃 구현 (개인정보로 이동)
+
+    qApp->exit(1000);
 }

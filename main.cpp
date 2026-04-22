@@ -7,7 +7,7 @@
 #include <QFontDatabase>
 
 static bool DEBUG = true;
-static bool ON_STARTWINDOW = false;
+static bool ON_STARTWINDOW = true;
 
 int main(int argc, char *argv[])
 {
