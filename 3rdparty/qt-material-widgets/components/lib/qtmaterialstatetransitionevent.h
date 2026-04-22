@@ -11,6 +11,8 @@ enum QtMaterialStateTransitionType {
     SnackbarNextTransition,
     // FlatButton
     FlatButtonPressedTransition,
+    FlatButtonInTransition,
+    FlatButtonOutTransition,
     FlatButtonCheckedTransition,
     FlatButtonUncheckedTransition,
     // CollapsibleMenu
