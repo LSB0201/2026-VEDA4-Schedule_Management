@@ -21,7 +21,7 @@ void ScheduleSearchView::setupUi() {
     // 2. QtMaterialAutoComplete (Search Bar)
     m_searchBar = new QtMaterialAutoComplete(this);
     m_searchBar->setPlaceholderText("Search schedules by title...");
-    m_searchBar->setPrimaryColor(QColor("#ef6c00")); // 오렌지 포인트 컬러
+    m_searchBar->setInkColor(QColor("#ef6c00")); // 오렌지 포인트 컬러
     mainLayout->addWidget(m_searchBar);
 
     // 3. Result Area

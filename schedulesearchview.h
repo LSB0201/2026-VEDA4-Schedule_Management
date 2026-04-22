@@ -2,14 +2,26 @@
 #define SCHEDULESEARCHVIEW_H
 
 #include <QWidget>
+#include <QJsonArray>
+#include <QVBoxLayout>
+#include "qtmaterialautocomplete.h"
 
-class ScheduleSearchView : public QWidget
-{
+class ScheduleSearchView : public QWidget {
     Q_OBJECT
 public:
     explicit ScheduleSearchView(QWidget *parent = nullptr);
+    void setScheduleData(const QJsonArray &data);
 
-signals:
+private slots:
+    void onSearchTextChanged(const QString &text);
+
+private:
+    QtMaterialAutoComplete *m_searchBar;
+    QVBoxLayout *m_resultsLayout;
+    QJsonArray m_allSchedules;
+
+    void setupUi();
+    void updateSearchResults(const QString &filter);
 };
 
-#endif // SCHEDULESEARCHVIEW_H
+#endif
