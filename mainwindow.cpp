@@ -1,13 +1,14 @@
 #include <QHeaderView>
 #include <QDate> // 날짜 처리를 위해 추가
+#include <QDir>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "daycellwidget.h"
 #include "sidebaropenclose.h"
 #include "sidebarcontentmanager.h"
+#include "jsonfilemanager.h"
 #include "scheduleinputview.h"
-#include "schedulesearchview.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -210,13 +211,32 @@ void MainWindow::onLeftFrameCalendarButtonClicked(){
 
 // stackedwidget이 없어서 주석처리함
 void MainWindow::onLeftFrameSearchButtonClicked() {
-    // ScheduleSearchView *searchView = new ScheduleSearchView(this);
+    QDir dir(QCoreApplication::applicationDirPath());
+    dir.cdUp();
+    dir.cdUp();
 
-    // // 팀원이 제공할 JSON 데이터를 가져와서 전달
-    // QJsonArray dummyData = loadJsonFromFile("data.json");
-    // searchView->setScheduleData(dummyData);
+    QString targetFolder = "resources/user_data";
+    QString savePath = dir.filePath(targetFolder + "/schedules.json");
 
+    JsonFileManager* m_fileManager = new JsonFileManager(savePath);
+    QList<ScheduleData> m_schedules = m_fileManager->loadAll();
+
+    if (!m_searchView) {
+        m_searchView = new ScheduleSearchView(this);
+
+        // ui->pageSearch에 레이아웃이 없다면 생성해줍니다.
+        if (!ui->pageSearch->layout()) {
+            QVBoxLayout *layout = new QVBoxLayout(ui->pageSearch);
+            layout->setContentsMargins(0,0,0,0);
+            ui->pageSearch->setLayout(layout);
+        }
+        ui->pageSearch->layout()->addWidget(m_searchView);
+    }
+
+    m_searchView->setScheduleData(m_schedules);
     ui->pageStack->setCurrentWidget(ui->pageSearch);
+
+    delete m_fileManager;
 }
 
 void MainWindow::onLeftFrameProfileButtonClicked(){
