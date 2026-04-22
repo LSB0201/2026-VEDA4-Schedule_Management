@@ -6,6 +6,7 @@
 #include "sidebaropenclose.h"
 #include "sidebarcontentmanager.h"
 #include "schedulesave.h"
+#include "schedulesearchview.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,6 +26,7 @@ protected:
 
 private:
     Ui::MainWindow *ui;
+    ScheduleSearchView *m_searchView;
 
     int m_currentYear;
     int m_currentMonth;

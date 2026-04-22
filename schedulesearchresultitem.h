@@ -1,8 +1,8 @@
 #include <QWidget>
-#include <QJsonObject>
+#include "schedulesave.h"
 
 class ScheduleSearchResultItem : public QWidget {
     Q_OBJECT
 public:
-    explicit ScheduleSearchResultItem(const QJsonObject &data, QWidget *parent = nullptr);
+    explicit ScheduleSearchResultItem(const ScheduleData &data, QWidget *parent = nullptr);
 };
