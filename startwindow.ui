@@ -555,7 +555,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QtMaterialFlatButton" name="pageSignUpBtnNext">
+           <widget class="QtMaterialRaisedButton" name="pageSignUpBtnNext">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -584,7 +584,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QtMaterialFlatButton" name="pageSignUpBtnPrev">
+           <widget class="QtMaterialRaisedButton" name="pageSignUpBtnPrev">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -757,14 +757,30 @@
            </spacer>
           </item>
           <item>
-           <widget class="QtMaterialFlatButton" name="pageProfileBtnCreate">
+           <widget class="QtMaterialRaisedButton" name="pageProfileBtnCreate">
             <property name="text">
              <string>Create Account</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QtMaterialFlatButton" name="pageProfileBtnPrev">
+           <spacer name="verticalSpacer_23">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Policy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QtMaterialRaisedButton" name="pageProfileBtnPrev">
             <property name="text">
              <string>Back to Previous</string>
             </property>
@@ -864,11 +880,6 @@
    <class>QtMaterialRaisedButton</class>
    <extends>QPushButton</extends>
    <header>qtmaterialraisedbutton.h</header>
-  </customwidget>
-  <customwidget>
-   <class>QtMaterialFlatButton</class>
-   <extends>QPushButton</extends>
-   <header>qtmaterialflatbutton.h</header>
   </customwidget>
   <customwidget>
    <class>QtMaterialTextField</class>

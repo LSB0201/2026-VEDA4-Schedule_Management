@@ -54,6 +54,38 @@ StartWindow::StartWindow(QWidget *parent)
     ui->pageLoginBtnSignUp->setFont(font);
     ui->pageLoginBtnSignUp->setFontSize(15);
 
+    ui->pageSignUpBtnNext->setFixedHeight(60);
+    ui->pageSignUpBtnNext->setBackgroundColor(QColor("#F37321"));
+    ui->pageSignUpBtnNext->setForegroundColor(Qt::black);
+    ui->pageSignUpBtnNext->setOverlayColor(QColor("#E96917"));
+    ui->pageSignUpBtnNext->setOverlayStyle(Material::TintedOverlay);
+    ui->pageSignUpBtnNext->setCornerRadius(15);
+    ui->pageSignUpBtnNext->setFont(font);
+    ui->pageSignUpBtnNext->setFontSize(15);
+
+    ui->pageSignUpBtnPrev->setFixedHeight(60);
+    ui->pageSignUpBtnPrev->setBackgroundColor(QColor("#E0E0E0"));
+    ui->pageSignUpBtnPrev->setForegroundColor(Qt::black);
+    ui->pageSignUpBtnPrev->setCornerRadius(15);
+    ui->pageSignUpBtnPrev->setFont(font);
+    ui->pageSignUpBtnPrev->setFontSize(15);
+
+    ui->pageProfileBtnCreate->setFixedHeight(60);
+    ui->pageProfileBtnCreate->setBackgroundColor(QColor("#F37321"));
+    ui->pageProfileBtnCreate->setForegroundColor(Qt::black);
+    ui->pageProfileBtnCreate->setOverlayColor(QColor("#E96917"));
+    ui->pageProfileBtnCreate->setOverlayStyle(Material::TintedOverlay);
+    ui->pageProfileBtnCreate->setCornerRadius(15);
+    ui->pageProfileBtnCreate->setFont(font);
+    ui->pageProfileBtnCreate->setFontSize(15);
+
+    ui->pageProfileBtnPrev->setFixedHeight(60);
+    ui->pageProfileBtnPrev->setBackgroundColor(QColor("#E0E0E0"));
+    ui->pageProfileBtnPrev->setForegroundColor(Qt::black);
+    ui->pageProfileBtnPrev->setCornerRadius(15);
+    ui->pageProfileBtnPrev->setFont(font);
+    ui->pageProfileBtnPrev->setFontSize(15);
+
 
     // set slots
     connect(ui->pageLoginBtnLogin, SIGNAL(clicked()), this, SLOT(onLoginRequested()));
