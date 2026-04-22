@@ -111,7 +111,12 @@ MainWindow::MainWindow(QWidget *parent)
     // 기존 일정 클릭 시 입력 창 띄우기 (매니저의 시그널 사용)
     connect(m_contentManager, &SidebarContentManager::scheduleItemClicked, this, &MainWindow::showScheduleInput);
 
-    connect(ui->leftFrameBtnSchedule, &QPushButton::clicked, this, &MainWindow::onSearchButtonClicked);
+    // 좌측 프레임 버튼 클릭 이벤트 연결
+    connect(ui->leftFrameBtnHome, &QPushButton::clicked, this, &MainWindow::onLeftFrameHomeButtonClicked);
+    connect(ui->leftFrameBtnCalendar, &QPushButton::clicked, this, &MainWindow::onLeftFrameCalendarButtonClicked);
+    connect(ui->leftFrameBtnSearch, &QPushButton::clicked, this, &MainWindow::onLeftFrameSearchButtonClicked);
+    connect(ui->leftFrameBtnProfile, &QPushButton::clicked, this, &MainWindow::onLeftFrameProfileButtonClicked);
+    connect(ui->leftFrameBtnLogout, &QPushButton::clicked, this, &MainWindow::onLeftFrameLogoutButtonClicked);
 
     // 프로그램 시작 시 최초 달력 그리기
     generateCalendar(m_currentYear, m_currentMonth);
@@ -195,8 +200,16 @@ void MainWindow::showScheduleInput() {
 }
 
 // slots
+void MainWindow::onLeftFrameHomeButtonClicked(){
+
+}
+
+void MainWindow::onLeftFrameCalendarButtonClicked(){
+
+}
+
 // stackedwidget이 없어서 주석처리함
-void MainWindow::onSearchButtonClicked() {
+void MainWindow::onLeftFrameSearchButtonClicked() {
     qDebug() << "검색창 전환 버튼 눌림";
     // ScheduleSearchView *searchView = new ScheduleSearchView(this);
 
@@ -207,4 +220,12 @@ void MainWindow::onSearchButtonClicked() {
     // // 기존의 centralWidget 내용을 searchView로 교체하거나 StackedWidget에 추가
     // ui->stackedWidget->addWidget(searchView);
     // ui->stackedWidget->setCurrentWidget(searchView);
+}
+
+void MainWindow::onLeftFrameProfileButtonClicked(){
+
+}
+
+void MainWindow::onLeftFrameLogoutButtonClicked(){
+
 }

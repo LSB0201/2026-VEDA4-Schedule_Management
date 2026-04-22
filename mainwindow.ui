@@ -130,7 +130,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="leftFrameBtnProfile">
+        <widget class="QPushButton" name="leftFrameBtnSearch">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -140,7 +140,7 @@
          <property name="maximumSize">
           <size>
            <width>50</width>
-           <height>47</height>
+           <height>50</height>
           </size>
          </property>
          <property name="text">
@@ -148,7 +148,7 @@
          </property>
          <property name="icon">
           <iconset resource="resources.qrc">
-           <normaloff>:/icon/resources/img/icon/profile.png</normaloff>:/icon/resources/img/icon/profile.png</iconset>
+           <normaloff>:/icon/resources/img/icon/search.png</normaloff>:/icon/resources/img/icon/search.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -175,7 +175,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="leftFrameBtnSchedule">
+        <widget class="QPushButton" name="leftFrameBtnProfile">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -185,7 +185,7 @@
          <property name="maximumSize">
           <size>
            <width>50</width>
-           <height>50</height>
+           <height>47</height>
           </size>
          </property>
          <property name="text">
@@ -193,7 +193,7 @@
          </property>
          <property name="icon">
           <iconset resource="resources.qrc">
-           <normaloff>:/icon/resources/img/icon/search.png</normaloff>:/icon/resources/img/icon/search.png</iconset>
+           <normaloff>:/icon/resources/img/icon/profile.png</normaloff>:/icon/resources/img/icon/profile.png</iconset>
          </property>
          <property name="iconSize">
           <size>

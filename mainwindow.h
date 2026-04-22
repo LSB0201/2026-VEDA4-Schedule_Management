@@ -38,6 +38,10 @@ private:
     void generateCalendar(int year, int month);
 
 private slots:
-    void onSearchButtonClicked();
+    void onLeftFrameHomeButtonClicked();
+    void onLeftFrameCalendarButtonClicked();
+    void onLeftFrameSearchButtonClicked();
+    void onLeftFrameProfileButtonClicked();
+    void onLeftFrameLogoutButtonClicked();
 };
 #endif // MAINWINDOW_H
