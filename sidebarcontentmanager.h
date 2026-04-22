@@ -3,7 +3,8 @@
 
 #include <QObject>
 #include <QScrollArea>
-#include <QDate>
+#include <QVBoxLayout>
+#include "schedulesave.h" // ScheduleData 구조체 사용
 
 class SidebarContentManager : public QObject {
     Q_OBJECT
@@ -11,7 +12,7 @@ public:
     explicit SidebarContentManager(QScrollArea *scrollArea, QObject *parent = nullptr);
 
     // 특정 날짜의 일정을 불러와 스크롤 영역에 채우는 함수
-    void loadSchedulesForDate(const QDate &date);
+    void loadSchedules(const QList<ScheduleData> &schedules);
 
 private:
     QScrollArea *m_scrollArea;
