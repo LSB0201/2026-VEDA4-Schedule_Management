@@ -1,5 +1,6 @@
 #include <QHeaderView>
 #include <QDate> // 날짜 처리를 위해 추가
+#include <QMessageBox> // 알림/경고창을 띄우기 위해 추가
 #include <QDir>
 
 #include "mainwindow.h"
@@ -9,12 +10,16 @@
 #include "sidebarcontentmanager.h"
 #include "jsonfilemanager.h"
 #include "scheduleinputview.h"
+#include "schedulesearchview.h"
+#include "scheduleitem.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    ui->pageStack->setCurrentIndex(0);// 나중에 삭제
 
     ui->frame_2->setVisible(false); // 사이드바 초기 숨김
 
@@ -106,11 +111,51 @@ MainWindow::MainWindow(QWidget *parent)
         }
     });
 
-    // Add Schedule 버튼 클릭 시 입력 창 출력
+    // Add Schedule 버튼 클릭 시 (새 일정 추가)
     connect(ui->addScheduleButton, &QPushButton::clicked, this, &MainWindow::showScheduleInput);
 
-    // 기존 일정 클릭 시 입력 창 띄우기 (매니저의 시그널 사용)
-    connect(m_contentManager, &SidebarContentManager::scheduleItemClicked, this, &MainWindow::showScheduleInput);
+
+    // 기존 일정 '더블 클릭' 시 수정 모드로 창 띄우기
+    connect(m_contentManager, &SidebarContentManager::scheduleItemDoubleClicked, this, [=](const ScheduleData& data){
+        ScheduleInputView *inputView = new ScheduleInputView(this);
+        inputView->setAttribute(Qt::WA_DeleteOnClose);
+
+        // 기존 데이터를 입력창에 채워줌 (수정 모드 활성화)
+        inputView->setEditData(data);
+
+        // Save 버튼을 눌렀을 때, 새 일정이 아니라 '수정' 로직이 실행되도록 연결
+        connect(inputView, &ScheduleInputView::editRequested, m_scheduleSave, &ScheduleSave::updateSchedule);
+
+        // 저장이 완료되면 화면 갱신
+        connect(m_scheduleSave, &ScheduleSave::scheduleSavedSuccessfully, this, [=](){
+            generateCalendar(m_currentYear, m_currentMonth);
+            if (ui->frame_2->isVisible()) {
+                QDate currentSelected = QDate::fromString(ui->todayLabel->text(), "yyyy. M. d");
+                if (currentSelected.isValid()) {
+                    m_contentManager->loadSchedules(m_scheduleSave->getSchedulesForDate(currentSelected));
+                }
+            }
+        });
+
+        inputView->showNextTo(ui->frame_2);
+    });
+
+    // 'Delete Schedule' 버튼 클릭 시 선택된 일정 삭제
+    connect(ui->deleteScheduleButton, &QPushButton::clicked, this, [=](){
+        ScheduleItem *selectedItem = m_contentManager->getSelectedItem();
+
+        if (selectedItem) {
+            // 사용자에게 한 번 더 물어보는 경고창
+            int ret = QMessageBox::question(this, "일정 삭제", "선택한 일정을 삭제하시겠습니까?", QMessageBox::Yes | QMessageBox::No);
+            if (ret == QMessageBox::Yes) {
+                // ScheduleSave 매니저에게 삭제 요청
+                m_scheduleSave->deleteSchedule(selectedItem->getScheduleData());
+            }
+        } else {
+            // 아무것도 선택하지 않고 삭제를 눌렀을 때의 경고창
+            QMessageBox::warning(this, "알림", "삭제할 일정을 먼저 한 번 클릭하여 선택해주세요.");
+        }
+    });
 
     // 좌측 프레임 버튼 클릭 이벤트 연결
     connect(ui->leftFrameBtnHome, &QPushButton::clicked, this, &MainWindow::onLeftFrameHomeButtonClicked);
@@ -178,6 +223,13 @@ void MainWindow::showScheduleInput() {
 
     // 입력창 종료시 메모리에서 자동 해제
     inputView->setAttribute(Qt::WA_DeleteOnClose);
+
+
+    // 5단계 핵심 3: 새 일정 추가 시 사이드바 상단의 날짜를 기본값으로
+    QDate selectedDate = QDate::fromString(ui->todayLabel->text(), "yyyy. M. d");
+    if (selectedDate.isValid()) {
+        inputView->setDefaultDate(selectedDate);
+    }
 
     // InputView에서 저장을 요청 -> ScheduleSave가 처리
     connect(inputView, &ScheduleInputView::saveRequested, m_scheduleSave, &ScheduleSave::saveSchedule);

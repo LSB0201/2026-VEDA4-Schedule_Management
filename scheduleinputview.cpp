@@ -44,6 +44,7 @@ ScheduleInputView::ScheduleInputView(QWidget *parent)
 
     // 기본 선택값 설정
     ui->orangeColorButton->setChecked(true);
+    m_selectedColor = QColor("#FF9800");
 
     // 버튼이 클릭되었을 때 색상 값을 변수(m_selectedColor)에 저장하도록 시그널 연결
     connect(m_colorGroup, &QButtonGroup::buttonClicked, this, &ScheduleInputView::onColorButtonClicked);
@@ -83,14 +84,40 @@ void ScheduleInputView::onColorButtonClicked(QAbstractButton *button) {
     }
 }
 
+void ScheduleInputView::setDefaultDate(const QDate &date) {
+    ui->dateEdit->setDate(date);
+    ui->dateEdit_2->setDate(date);
+    ui->timeEdit->setTime(QTime::currentTime());
+    ui->timeEdit_2->setTime(QTime::currentTime().addSecs(3600)); // 종료는 1시간 뒤로 세팅
+}
+
+void ScheduleInputView::setEditData(const ScheduleData &data) {
+    m_isEditMode = true;
+    m_originalData = data;
+    m_selectedColor = data.color;
+
+    ui->lineEdit->setText(data.title);
+    ui->dateEdit->setDate(data.startDate);
+    ui->timeEdit->setTime(data.startTime);
+    ui->dateEdit_2->setDate(data.endDate);
+    ui->timeEdit_2->setTime(data.endTime);
+    ui->textEdit->setPlainText(data.memo);
+
+    // 색상 버튼 선택 상태 반영
+    QString hex = data.color.name(QColor::HexRgb).toUpper();
+    if (hex == "#F44336") ui->redColorButton->setChecked(true);
+    else if (hex == "#FFEB3B") ui->yellowColorButton->setChecked(true);
+    else if (hex == "#4CAF50") ui->greenColorButton->setChecked(true);
+    else if (hex == "#2196F3") ui->blueColorButton->setChecked(true);
+    else ui->orangeColorButton->setChecked(true); // 기본값
+}
+
 void ScheduleInputView::onSaveClicked() {
-    // 제목 필수 입력 확인
     if (ui->lineEdit->text().trimmed().isEmpty()) {
         QMessageBox::warning(this, "입력 오류", "일정 제목을 입력해주세요.");
         return;
     }
 
-    // 구조체에 데이터 저장
     ScheduleData newData;
     newData.title = ui->lineEdit->text();
     newData.color = m_selectedColor;
@@ -100,8 +127,10 @@ void ScheduleInputView::onSaveClicked() {
     newData.endTime = ui->timeEdit_2->time();
     newData.memo = ui->textEdit->toPlainText();
 
-    // 포장한 데이터를 시그널로 발송
-    emit saveRequested(newData);
-
+    if (m_isEditMode) {
+        emit editRequested(m_originalData, newData); // 수정 모드일 때
+    } else {
+        emit saveRequested(newData); // 새 일정일 때
+    }
     this->close();
 }
