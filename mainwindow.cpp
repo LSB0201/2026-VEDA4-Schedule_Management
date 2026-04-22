@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    ui->pageStack->setCurrentIndex(0);// 나중에 삭제
+
     ui->frame_2->setVisible(false); // 사이드바 초기 숨김
 
     // 객체 생성

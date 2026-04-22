@@ -87,3 +87,27 @@ QList<ScheduleData> ScheduleSave::getSchedulesForDate(const QDate &date) const {
     }
     return result;
 }
+
+bool ScheduleSave::updateSchedule(const ScheduleData &oldData, const ScheduleData &newData) { // 수정
+    int index = m_schedules.indexOf(oldData);
+    if (index != -1) {
+        m_schedules[index] = newData; // 새 데이터로 덮어쓰기
+        if (m_fileManager->saveAll(m_schedules)) {
+            emit scheduleSavedSuccessfully(); // 화면 갱신용 시그널 발송
+            return true;
+        }
+    }
+    return false;
+}
+
+bool ScheduleSave::deleteSchedule(const ScheduleData &data) { // 삭제
+    int index = m_schedules.indexOf(data);
+    if (index != -1) {
+        m_schedules.removeAt(index);
+        if (m_fileManager->saveAll(m_schedules)) {
+            emit scheduleSavedSuccessfully(); // 화면 갱신용 시그널 발송
+            return true;
+        }
+    }
+    return false;
+}

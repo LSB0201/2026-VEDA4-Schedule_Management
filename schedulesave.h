@@ -21,6 +21,12 @@ struct ScheduleData {
     QTime endTime;
     QString memo;
 
+    // 두 일정이 같은지 비교하는 기능(수정에 필요)
+    bool operator==(const ScheduleData& other) const {
+        return title == other.title && startDate == other.startDate &&
+               startTime == other.startTime && memo == other.memo;
+    }
+
     // JSON 직렬화/역직렬화 함수 선언
     QJsonObject toJson() const;
     static ScheduleData fromJson(const QJsonObject &json);
@@ -36,6 +42,9 @@ public:
     bool saveSchedule(const ScheduleData &data);
     // 특정 날짜의 일정 목록을 가져오는 함수
     QList<ScheduleData> getSchedulesForDate(const QDate &date) const;
+
+    bool deleteSchedule(const ScheduleData &data);
+    bool updateSchedule(const ScheduleData &oldData, const ScheduleData &newData);
 
 private:
     QList<ScheduleData> m_schedules; // 메모리에 유지할 일정 리스트
