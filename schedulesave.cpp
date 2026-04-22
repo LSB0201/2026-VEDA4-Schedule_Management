@@ -5,8 +5,21 @@
 #include <QDebug>
 
 ScheduleSave::ScheduleSave(QObject *parent) : QObject(parent) {
-    // 실행 파일이 있는 폴더에 schedules.json 파일 경로 설정
-    QString savePath = "C:/Qt_Project/2026-VEDA4-Schedule_Management/schedules.json";
+    // 실행 파일 위치에서 출발
+    QDir dir(QCoreApplication::applicationDirPath());
+    dir.cdUp(); // 상위 폴더로 2번 이동
+    dir.cdUp();
+
+    // 표 폴더 경로 설정
+    QString targetFolder = "resources/user_data";
+
+    // 해당 폴더가 없다면 자동으로 생성
+    if (!dir.exists(targetFolder)) {
+        dir.mkpath(targetFolder);
+    }
+    QString savePath = dir.filePath(targetFolder + "/schedules.json");
+
+    // 완성된 상대 경로로 파일 매니저 생성
     m_fileManager = new JsonFileManager(savePath);
 
     // 프로그램 시작 시 기존 데이터 불러와서 m_schedules에 저장
