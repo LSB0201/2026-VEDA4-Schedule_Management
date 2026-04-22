@@ -44,6 +44,10 @@ qt_add_executable(2026-VEDA4-Schedule_Management
     jsonfilemanager.h
     authmanager.cpp
     authmanager.h
+    schedulesearchview.cpp
+    schedulesearchview.h
+    schedulesearchresultitem.cpp
+    schedulesearchresultitem.h
     ${MATERIAL_SOURCES}
 )
 

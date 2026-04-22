@@ -36,5 +36,8 @@ private:
     void showScheduleInput(); // 입력 창 띄우는 함수 선언
     void updateMonthLabel(); // 상단 라벨 텍스트를 갱신하는 함수
     void generateCalendar(int year, int month);
+
+private slots:
+    void onSearchButtonClicked();
 };
 #endif // MAINWINDOW_H

@@ -7,6 +7,7 @@
 #include "sidebaropenclose.h"
 #include "sidebarcontentmanager.h"
 #include "scheduleinputview.h"
+#include "schedulesearchview.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -110,6 +111,8 @@ MainWindow::MainWindow(QWidget *parent)
     // 기존 일정 클릭 시 입력 창 띄우기 (매니저의 시그널 사용)
     connect(m_contentManager, &SidebarContentManager::scheduleItemClicked, this, &MainWindow::showScheduleInput);
 
+    connect(ui->searchButton, &QPushButton::clicked, this, &MainWindow::onSearchButtonClicked);
+
     // 프로그램 시작 시 최초 달력 그리기
     generateCalendar(m_currentYear, m_currentMonth);
 }
@@ -189,4 +192,19 @@ void MainWindow::showScheduleInput() {
 
     // ScheduleInputView 스스로 사이드바(ui->frame_2) 옆에 뜨도록 명령
     inputView->showNextTo(ui->frame_2);
+}
+
+// slots
+// stackedwidget이 없어서 주석처리함
+void MainWindow::onSearchButtonClicked() {
+    qDebug() << "검색창 전환 버튼 눌림";
+    // ScheduleSearchView *searchView = new ScheduleSearchView(this);
+
+    // // 팀원이 제공할 JSON 데이터를 가져와서 전달
+    // QJsonArray dummyData = loadJsonFromFile("data.json");
+    // searchView->setScheduleData(dummyData);
+
+    // // 기존의 centralWidget 내용을 searchView로 교체하거나 StackedWidget에 추가
+    // ui->stackedWidget->addWidget(searchView);
+    // ui->stackedWidget->setCurrentWidget(searchView);
 }
